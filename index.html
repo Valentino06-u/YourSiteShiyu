@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>對於詩宇來說 💕</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink: #FFD6E8;
+    --pink-deep: #FF9FCB;
+    --lavender: #E7DBFF;
+    --butter: #FFF3B0;
+    --mint: #C9F2E4;
+    --cream: #FFFDF9;
+    --plum: #4A2545;
+    --plum-soft: #7A5C7E;
+  }
+
+  /* ---------- Temi alternativi: cambiano solo gli accenti colore ---------- */
+  body.theme-menta{
+    --pink: #D6F5E3;
+    --pink-deep: #3FBF8F;
+    --lavender: #BEE8E8;
+    --butter: #FFE9A8;
+    --mint: #9FE8D8;
+  }
+  body.theme-pesca{
+    --pink: #FFD9B8;
+    --pink-deep: #FF8A5B;
+    --lavender: #FFE3C2;
+    --butter: #FFEEA0;
+    --mint: #FFC9C9;
+  }
+  body.theme-notte{
+    --pink: #D8B4E0;
+    --pink-deep: #8B4FD1;
+    --lavender: #B79CE0;
+    --butter: #E0C568;
+    --mint: #9E86C7;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--cream);
+    color: var(--plum);
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+  }
+  h1,h2,h3, .display{
+    font-family: 'Baloo 2', cursive;
+    color: var(--plum);
+  }
+
+  .sticker{
+    position: absolute;
+    font-size: 2rem;
+    opacity: .85;
+    animation: float 6s ease-in-out infinite;
+    user-select:none;
+    pointer-events:none;
+  }
+  @keyframes float{
+    0%,100%{ transform: translateY(0) rotate(0deg); }
+    50%{ transform: translateY(-18px) rotate(8deg); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .sticker{ animation: none; }
+  }
+
+  /* ---------- Selettore temi ---------- */
+  .theme-switcher{
+    display:flex;
+    justify-content:center;
+    gap: .6rem;
+    flex-wrap:wrap;
+    margin-top: 1.8rem;
+    position: relative;
+    z-index: 5;
+  }
+  .theme-btn{
+    font-family:'Baloo 2';
+    font-weight:700;
+    font-size: .8rem;
+    padding: .45rem 1rem;
+    border-radius: 999px;
+    border: 3px solid var(--plum);
+    background: white;
+    cursor:pointer;
+    color: var(--plum);
+    display:flex;
+    align-items:center;
+    gap: .35rem;
+  }
+  .theme-btn.active{ background: var(--pink); }
+  .theme-dot{
+    width: 14px; height:14px;
+    border-radius:50%;
+    border: 2px solid var(--plum);
+    display:inline-block;
+  }
+
+  .hero{
+    position: relative;
+    min-height: 92vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 2rem 1.2rem;
+    background:
+      radial-gradient(circle at 15% 20%, var(--pink) 0%, transparent 45%),
+      radial-gradient(circle at 85% 15%, var(--lavender) 0%, transparent 45%),
+      radial-gradient(circle at 50% 90%, var(--mint) 0%, transparent 40%),
+      var(--cream);
+  }
+  .hero .eyebrow{
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--pink-deep);
+    font-size: .85rem;
+    margin-bottom: .5rem;
+  }
+  .hero h1{
+    font-size: clamp(2.4rem, 7vw, 4.6rem);
+    margin: 0;
+    font-weight: 800;
+    text-shadow: 3px 3px 0 var(--pink);
+  }
+  .hero .sub{
+    margin-top: 1rem;
+    font-size: 1.15rem;
+    color: var(--plum-soft);
+    max-width: 32rem;
+  }
+  .hero .heart{
+    margin-top: 2.2rem;
+    font-size: 2.5rem;
+    animation: beat 1.4s ease-in-out infinite;
+  }
+  @keyframes beat{
+    0%,100%{ transform: scale(1); }
+    50%{ transform: scale(1.18); }
+  }
+  .scroll-hint{
+    margin-top: 2.5rem;
+    font-size: .85rem;
+    color: var(--plum-soft);
+    opacity: .7;
+  }
+
+  section{
+    padding: 5rem 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .section-title{
+    text-align:center;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin-bottom: .4rem;
+  }
+  .section-kicker{
+    text-align:center;
+    color: var(--pink-deep);
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    font-size:.8rem;
+    margin-bottom: .6rem;
+  }
+  .section-sub{
+    text-align:center;
+    color: var(--plum-soft);
+    max-width: 34rem;
+    margin: 0 auto 2.6rem;
+  }
+
+  .card{
+    background: white;
+    border-radius: 28px;
+    box-shadow: 0 10px 0 rgba(255, 159, 203, .35);
+    border: 3px solid var(--plum);
+  }
+
+  .gallery{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 1.4rem;
+  }
+  .photo{
+    overflow:hidden;
+    aspect-ratio: 4/5;
+    position:relative;
+    transform: rotate(var(--r,0deg));
+    cursor: pointer;
+  }
+  .photo:nth-child(odd){ --r: -2.5deg; }
+  .photo:nth-child(even){ --r: 2.5deg; }
+  .photo img{
+    width:100%; height:100%; object-fit: cover; display:block;
+  }
+  .photo figcaption{
+    position:absolute; bottom:0; left:0; right:0;
+    background: rgba(74,37,69,.75);
+    color:white;
+    font-family:'Baloo 2';
+    font-size:.9rem;
+    padding: .5rem .8rem;
+    text-align:center;
+  }
+
+  /* ---------- Lightbox (foto ingrandita) ---------- */
+  .lightbox{
+    display:none;
+    position: fixed;
+    inset: 0;
+    background: rgba(74,37,69,.92);
+    z-index: 999;
+    align-items:center;
+    justify-content:center;
+    padding: 2rem 1.2rem;
+  }
+  .lightbox.open{ display:flex; }
+  .lightbox-content{
+    max-width: min(600px, 92vw);
+    max-height: 88vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .lightbox-content img{
+    max-width:100%;
+    max-height: 72vh;
+    border-radius: 22px;
+    border: 4px solid white;
+    box-shadow: 0 12px 0 rgba(0,0,0,.2);
+    object-fit: contain;
+  }
+  .lightbox-caption{
+    color: white;
+    font-family:'Baloo 2';
+    font-size: 1.1rem;
+    margin-top: 1.2rem;
+    text-align:center;
+  }
+  .lightbox-close{
+    position:absolute;
+    top: 1.4rem;
+    right: 1.6rem;
+    background: white;
+    color: var(--plum);
+    border: 3px solid var(--plum);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.4rem;
+    font-family:'Baloo 2';
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .envelope-wrap{
+    display:flex; justify-content:center;
+  }
+  .envelope{
+    width: min(420px, 90vw);
+    background: linear-gradient(135deg, var(--pink) 0%, var(--lavender) 100%);
+    border-radius: 20px;
+    border: 3px solid var(--plum);
+    padding: 2.4rem 1.5rem;
+    text-align:center;
+    cursor:pointer;
+    transition: transform .25s ease;
+    box-shadow: 0 10px 0 rgba(74,37,69,.15);
+  }
+  .envelope:hover{ transform: translateY(-4px) scale(1.02); }
+  .envelope .icon{ font-size: 3rem; }
+  .envelope p{ font-weight:700; margin-top:.6rem; }
+
+  .letter{
+    display:none;
+    margin-top: 1.6rem;
+    padding: 2.2rem;
+    line-height: 1.85;
+    font-size: 1.05rem;
+    white-space: pre-line;
+  }
+  .letter.open{ display:block; }
+  .letter .signoff{
+    margin-top: 1.6rem;
+    font-family:'Baloo 2';
+    font-weight:700;
+    color: var(--pink-deep);
+    text-align:right;
+  }
+
+  .countdown-box{
+    padding: 2.4rem 1.5rem;
+    text-align:center;
+  }
+  .countdown-grid{
+    display:flex;
+    justify-content:center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+  .count-cell{
+    background: var(--butter);
+    border: 3px solid var(--plum);
+    border-radius: 18px;
+    padding: 1rem 1.3rem;
+    min-width: 84px;
+  }
+  .count-cell .num{
+    font-family:'Baloo 2';
+    font-size: 2.1rem;
+    font-weight: 800;
+    display:block;
+  }
+  .count-cell .label{
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--plum-soft);
+  }
+
+  .playlist{
+    display:flex;
+    flex-direction:column;
+    gap: .9rem;
+  }
+  .track{
+    display:flex;
+    align-items:center;
+    gap: 1rem;
+    padding: .9rem 1.2rem;
+    border-radius: 16px;
+    border: 3px solid var(--plum);
+    background: var(--mint);
+    text-decoration:none;
+    color: inherit;
+    transition: transform .15s ease;
+  }
+  .track:hover{ transform: translateY(-2px); }
+  .track:nth-child(3n+2){ background: var(--pink); }
+  .track:nth-child(3n){ background: var(--lavender); }
+  .track .note{ font-size: 1.4rem; }
+  .track .meta{ flex:1; }
+  .track .title{ font-family:'Baloo 2'; font-weight:700; }
+  .track .artist{ font-size: .85rem; color: var(--plum-soft); }
+  .track .play{ font-size: 1.1rem; opacity:.7; }
+
+  .memories{
+    display:grid;
+    gap: 1.2rem;
+  }
+  .memory{
+    display:grid;
+    grid-template-columns: 90px 1fr;
+    gap: 1rem;
+    padding: 1.2rem;
+    align-items:center;
+  }
+  .memory .date{
+    font-family:'Baloo 2';
+    font-weight:700;
+    color: var(--pink-deep);
+    text-align:center;
+  }
+  .memory .text strong{ font-family:'Baloo 2'; }
+
+  /* ---------- Giochi ---------- */
+  .game-tabs{
+    display:flex;
+    justify-content:center;
+    gap: .8rem;
+    flex-wrap:wrap;
+    margin-bottom: 2rem;
+  }
+  .game-tab{
+    font-family:'Baloo 2';
+    font-weight:700;
+    font-size: .95rem;
+    padding: .6rem 1.2rem;
+    border-radius: 999px;
+    border: 3px solid var(--plum);
+    background: white;
+    cursor:pointer;
+    color: var(--plum);
+  }
+  .game-tab.active{ background: var(--pink); }
+  .game-panel{ display:none; }
+  .game-panel.active{ display:block; }
+
+  .game-box{
+    padding: 2rem 1.2rem;
+    text-align:center;
+  }
+  .game-message{
+    font-family:'Baloo 2';
+    font-weight:700;
+    font-size: 1.2rem;
+    min-height: 2rem;
+    margin: 1rem 0;
+    color: var(--pink-deep);
+  }
+  .game-reset{
+    font-family:'Baloo 2';
+    font-weight:700;
+    border: 3px solid var(--plum);
+    background: var(--butter);
+    border-radius: 999px;
+    padding: .5rem 1.4rem;
+    cursor:pointer;
+    margin-top: 1rem;
+  }
+
+  /* Tris */
+  .ttt-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(3, 80px);
+    gap: .6rem;
+    justify-content:center;
+    margin: 0 auto;
+  }
+  .ttt-cell{
+    background: white;
+    border: 3px solid var(--plum);
+    border-radius: 16px;
+    font-family:'Baloo 2';
+    font-size: 2.2rem;
+    font-weight: 800;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    color: var(--pink-deep);
+  }
+  .ttt-turn{ color: var(--plum-soft); font-weight:700; }
+
+  /* Memory */
+  .memory-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 70px);
+    gap: .6rem;
+    justify-content:center;
+    margin: 0 auto;
+  }
+  .memory-card{
+    width:70px; height:70px;
+    background: var(--lavender);
+    border: 3px solid var(--plum);
+    border-radius: 14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size: 1.8rem;
+    cursor:pointer;
+  }
+  .memory-card.flipped{ background: white; }
+  .memory-card.matched{ background: var(--mint); opacity:.6; cursor:default; }
+  .memory-stats{
+    font-weight:700;
+    color: var(--plum-soft);
+    margin-bottom: 1rem;
+  }
+
+  /* Fiammiferi */
+  .nim-sticks{
+    font-size: 2.4rem;
+    letter-spacing: .3rem;
+    line-height: 3rem;
+    margin: 1rem 0;
+  }
+  .nim-controls{
+    display:flex;
+    justify-content:center;
+    gap: .8rem;
+    flex-wrap:wrap;
+  }
+  .nim-btn{
+    font-family:'Baloo 2';
+    font-weight:700;
+    border: 3px solid var(--plum);
+    background: var(--mint);
+    border-radius: 999px;
+    padding: .6rem 1.3rem;
+    cursor:pointer;
+  }
+  .nim-btn:disabled{ opacity:.4; cursor:default; }
+
+  footer{
+    text-align:center;
+    padding: 3rem 1.5rem 4rem;
+    color: var(--plum-soft);
+    font-size: .9rem;
+  }
+  footer .heart{ color: var(--pink-deep); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="sticker" style="top:12%; left:10%; animation-delay:0s;">✨</span>
+  <span class="sticker" style="top:20%; right:12%; animation-delay:1s;">🌸</span>
+  <span class="sticker" style="bottom:18%; left:15%; animation-delay:2s;">⭐</span>
+  <span class="sticker" style="bottom:14%; right:10%; animation-delay:1.5s;">🍡</span>
+  <span class="sticker" style="top:35%; left:6%; animation-delay:.7s;">🖤</span>
+  <span class="sticker" style="top:40%; right:8%; animation-delay:2.3s;">🖤</span>
+
+  <div class="eyebrow">網路的一個小角落</div>
+  <h1>對於詩宇來說 💕</h1>
+  <p class="sub">只為你。一個不錯的小地方,我把我們中的一些人安置在那裡。</p>
+  <div class="heart">💗🖤</div>
+  <div class="scroll-hint">向下捲動 ↓</div>
+
+  <div class="theme-switcher">
+    <button class="theme-btn active" id="theme-btn-originale" onclick="setTheme('originale')">
+      <span class="theme-dot" style="background:#FFD6E8;"></span>原始
+    </button>
+    <button class="theme-btn" id="theme-btn-menta" onclick="setTheme('menta')">
+      <span class="theme-dot" style="background:#3FBF8F;"></span>薄荷
+    </button>
+    <button class="theme-btn" id="theme-btn-pesca" onclick="setTheme('pesca')">
+      <span class="theme-dot" style="background:#FF8A5B;"></span>蜜桃
+    </button>
+    <button class="theme-btn" id="theme-btn-notte" onclick="setTheme('notte')">
+      <span class="theme-dot" style="background:#8B4FD1;"></span>夜紫🖤
+    </button>
+  </div>
+</div>
+
+<section id="foto">
+  <div class="section-kicker">一刻一刻</div>
+  <h2 class="section-title">我們兩個</h2>
+  <p class="section-sub">當我想起你時,我喜歡看一些鏡頭。</p>
+
+  <div class="gallery">
+    <figure class="photo card" onclick="openLightbox(this)">
+      <img src="foto/Shiyu1.jpeg" alt="照片 1">
+      <figcaption>你很驚訝😲而我飛翔🪽</figcaption>
+    </figure>
+    <figure class="photo card" onclick="openLightbox(this)">
+      <img src="foto/Shiyu2.jpeg" alt="照片 2">
+      <figcaption>兩隻小貓休息🤘🐈‍⬛🐈‍⬛</figcaption>
+    </figure>
+    <figure class="photo card" onclick="openLightbox(this)">
+      <img src="foto/Shiyu3.jpeg" alt="照片 3">
+      <figcaption>🥴🙃🤪</figcaption>
+    </figure>
+    <figure class="photo card" onclick="openLightbox(this)">
+      <img src="foto/Shiyu4.jpeg" alt="照片 4">
+      <figcaption>如果你仔細想想,這是我們在一起的第一張照片🖤📷</figcaption>
+    </figure>
+    <figure class="photo card" onclick="openLightbox(this)">
+      <img src="foto/Shiyu5.jpeg" alt="照片 5">
+      <figcaption>我的革命性藝術作品✨🔥</figcaption>
+    </figure>
+    <figure class="photo card" onclick="openLightbox(this)">
+      <img src="foto/Shiyu6.jpeg" alt="照片 6">
+      <figcaption>有一天這會被重做,但更好的是我有一些想法💡💡</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(event)">✕</button>
+  <div class="lightbox-content" onclick="event.stopPropagation()">
+    <img id="lightbox-img" src="" alt="">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+</div>
+
+<section id="lettera">
+  <div class="section-kicker">點擊打開</div>
+  <h2 class="section-title">一封信</h2>
+  <div class="envelope-wrap">
+    <div>
+      <div class="envelope card" id="envelope" onclick="toggleLetter()">
+        <div class="icon">💌</div>
+        <p>打開信封</p>
+      </div>
+      <div class="letter card" id="letter">
+        <p id="letter-text">你好,我的愛人,
+
+我在這裡寫一些我有時很難口頭告訴你的事情。
+你也是讓我想微笑的人
+在糟糕的日子裡,以及我們做的每一件小事
+這一起成為我最喜歡的回憶。
+我想用這個信封當小日誌 
+所以我認為這封信會越來越大哈哈
+
+無論如何...
+
+
+謝謝你保持不變。
+無論你在哪裡,我無時無刻都在想著你。我對你的愛 
+它永遠不會減少,
+因為我愛你。🥰🖤🐈‍⬛</p>
+        <div class="signoff">— 盡我所能</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="countdown">
+  <div class="section-kicker">從一切開始的那一天起</div>
+  <h2 class="section-title">一起</h2>
+  <div class="countdown-box card">
+    <p class="section-sub" style="margin-bottom:0;">每多一天都是一份禮物🎁</p>
+    <div class="countdown-grid" id="countdown-grid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GIOCHI
+============================================================ -->
+<section id="giochi">
+  <div class="section-kicker">遊戲中斷</div>
+  <h2 class="section-title">我們玩一會兒好嗎？</h2>
+  <p class="section-sub">Tris、記憶和比賽遊戲,僅此而已:D</p>
+
+  <div class="game-tabs">
+    <button class="game-tab active" onclick="showGame('ttt')" id="tab-ttt">✖️⭕ 特里斯</button>
+    <button class="game-tab" onclick="showGame('memory')" id="tab-memory">🃏 記憶</button>
+    <button class="game-tab" onclick="showGame('nim')" id="tab-nim">🔥 比賽</button>
+  </div>
+
+  <!-- Tris -->
+  <div class="game-panel active card game-box" id="panel-ttt">
+    <div class="ttt-turn" id="ttt-turn">輪到你了 (❌)</div>
+    <div class="ttt-grid" id="ttt-grid"></div>
+    <div class="game-message" id="ttt-message"></div>
+    <button class="game-reset" onclick="resetTTT()">重新開始</button>
+  </div>
+
+  <!-- Memory -->
+  <div class="game-panel card game-box" id="panel-memory">
+    <div class="memory-stats" id="memory-stats">嘗試次數已剩餘: 10</div>
+    <div class="memory-grid" id="memory-grid"></div>
+    <div class="game-message" id="memory-message"></div>
+    <button class="game-reset" onclick="resetMemory()">重新開始</button>
+  </div>
+
+  <!-- Fiammiferi -->
+  <div class="game-panel card game-box" id="panel-nim">
+    <p class="section-sub" style="margin-bottom:.5rem;">每次可以拿1、2或3根火柴。誰拿走最後一根,誰就輸了！</p>
+    <div class="ttt-turn" id="nim-turn">輪到你了</div>
+    <div class="nim-sticks" id="nim-sticks"></div>
+    <div class="nim-controls">
+      <button class="nim-btn" onclick="nimTake(1)" id="nim-take-1">拿 1 根</button>
+      <button class="nim-btn" onclick="nimTake(2)" id="nim-take-2">拿 2 根</button>
+      <button class="nim-btn" onclick="nimTake(3)" id="nim-take-3">拿 3 根</button>
+    </div>
+    <div class="game-message" id="nim-message"></div>
+    <button class="game-reset" onclick="resetNim()">重新開始</button>
+  </div>
+</section>
+
+<section id="playlist">
+  <div class="section-kicker">你的配樂</div>
+  <h2 class="section-title">為您播放清單</h2>
+  <div class="playlist">
+    <a href="https://www.youtube.com/watch?v=NxN61sK-Y2Q" target="_blank" rel="noopener" class="track card">
+      <span class="note">🎵</span>
+      <div class="meta">
+        <div class="title">絕對佔有相對自由</div>
+        <div class="artist">陳麗。</div>
+      </div>
+      <span class="play">▶</span>
+    </a>
+    <a href="https://www.youtube.com/watch?v=rBrd_3VMC3c" target="_blank" rel="noopener" class="track card">
+      <span class="note">🎶</span>
+      <div class="meta">
+        <div class="title">多麼美好的世界</div>
+        <div class="artist">路易斯·阿姆斯特朗</div>
+      </div>
+      <span class="play">▶</span>
+    </a>
+    <a href="https://www.youtube.com/watch?v=5zLnaNY58j8" target="_blank" rel="noopener" class="track card">
+      <span class="note">🎵</span>
+      <div class="meta">
+        <div class="title">波西米亞狂想曲</div>
+        <div class="artist"> 女王</div>
+      </div>
+      <span class="play">▶</span>
+    </a>
+    <a href="https://www.youtube.com/watch?v=fLICuTGQMYA" target="_blank" rel="noopener" class="track card">
+      <span class="note">🎶</span>
+      <div class="meta">
+        <div class="title">你愛我,但你沒有告訴我你最喜歡他的哪首歌。-。</div>
+        <div class="artist">小泰卡</div>
+      </div>
+      <span class="play">▶</span>
+    </a>
+  </div>
+</section>
+
+<section id="ricordi">
+  <div class="section-kicker">小小重要時刻</div>
+  <h2 class="section-title">我們的記憶</h2>
+  <div class="memories">
+    <div class="memory card">
+      <div class="date">輸出 1</div>
+      <div class="text"><strong>第一次會議</strong><br>我可能是這裡最冷的版本,我擔心你害怕我,哈哈.</div>
+    </div>
+    <div class="memory card">
+      <div class="date">輸出 2</div>
+      <div class="text"><strong>第二次會議</strong><br>不幸的是,我們沒能找到一個 frae 密室逃脫,但我們將來會做一個,然後我們一起拍了第一張照片 😲.</div>
+    </div>
+    <div class="memory card">
+      <div class="date">輸出 3</div>
+      <div class="text"><strong>我真的希望我能經常看到這個輪子。。</strong><br>第一次擁抱哈哈,儘管我是個白痴.</div>
+    </div>
+    <div class="memory card">
+      <div class="date">輸出 4</div>
+      <div class="text"><strong>我最喜歡的會議,我會再參加 10000 次</strong><br>理論上也是我們真正的第一次約會,然後是初吻... 😳 不,我沒有親吻座位...也許。。</div>
+    </div>
+    <div class="memory card">
+      <div class="date">輸出 5</div>
+      <div class="text"><strong>理論上這是我們的第二次約會,我們會放鬆很多哇:O</strong><br>這則訊息是一個佔位符,因為我不知道在水療中心的一天過得怎麼樣,所以我稍後會更新它</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  由製成 <span class="heart">♥🖤</span> 對於詩宇來說
+</footer>
+
+<script>
+  function toggleLetter(){
+    var letter = document.getElementById('letter');
+    var envelope = document.getElementById('envelope');
+    letter.classList.toggle('open');
+    envelope.querySelector('p').textContent = letter.classList.contains('open') ? 'Chiudi la lettera' : 'Apri la busta';
+  }
+
+  function openLightbox(figureEl){
+    var img = figureEl.querySelector('img');
+    var caption = figureEl.querySelector('figcaption');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').alt = img.alt;
+    document.getElementById('lightbox-caption').textContent = caption ? caption.textContent : '';
+    document.getElementById('lightbox').classList.add('open');
+  }
+
+  function closeLightbox(event){
+    document.getElementById('lightbox').classList.remove('open');
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ document.getElementById('lightbox').classList.remove('open'); }
+  });
+
+  // =========================================================
+  // TEMI: cambiano solo i colori d'accento, non toccano i testi
+  // =========================================================
+  function setTheme(name){
+    document.body.className = (name === 'originale') ? '' : ('theme-' + name);
+    ['originale','menta','pesca','notte'].forEach(function(t){
+      document.getElementById('theme-btn-' + t).classList.toggle('active', t === name);
+    });
+    try{ localStorage.setItem('shiyuSiteTheme', name); }catch(e){}
+  }
+
+  (function initTheme(){
+    var saved = 'originale';
+    try{ saved = localStorage.getItem('shiyuSiteTheme') || 'originale'; }catch(e){}
+    setTheme(saved);
+  })();
+
+  var startDate = new Date('2026-08-01T00:00:00');
+
+  function updateCountdown(){
+    var now = new Date();
+    var diffMs = now - startDate;
+    if(diffMs < 0){ diffMs = 0; }
+
+    var totalSeconds = Math.floor(diffMs / 1000);
+    var days = Math.floor(totalSeconds / 86400);
+    var hours = Math.floor((totalSeconds % 86400) / 3600);
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
+    var seconds = totalSeconds % 60;
+
+    var grid = document.getElementById('countdown-grid');
+    grid.innerHTML =
+      cell(days, '天') +
+      cell(hours, '小時') +
+      cell(minutes, '分鐘') +
+      cell(seconds, '秒');
+  }
+
+  function cell(value, label){
+    return '<div class="count-cell"><span class="num">' + value + '</span><span class="label">' + label + '</span></div>';
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // =========================================================
+  // GIOCHI: gestione tab
+  // =========================================================
+  function showGame(name){
+    ['ttt','memory','nim'].forEach(function(g){
+      document.getElementById('panel-'+g).classList.toggle('active', g === name);
+      document.getElementById('tab-'+g).classList.toggle('active', g === name);
+    });
+  }
+
+  // =========================================================
+  // TRIS (Croci e Cerchi) - Tu (❌) contro il computer (⭕)
+  // =========================================================
+  var tttBoard = [];
+  var tttGameOver = false;
+  var HUMAN = 'X';
+  var BOT = 'O';
+
+  function renderTTT(){
+    var grid = document.getElementById('ttt-grid');
+    grid.innerHTML = '';
+    for(var i = 0; i < 9; i++){
+      var cell = document.createElement('div');
+      cell.className = 'ttt-cell';
+      cell.textContent = tttBoard[i] || '';
+      cell.onclick = (function(index){ return function(){ tttMove(index); }; })(i);
+      grid.appendChild(cell);
+    }
+  }
+
+  function tttMove(index){
+    if(tttGameOver || tttBoard[index]) return;
+
+    tttBoard[index] = HUMAN;
+    renderTTT();
+
+    var winner = tttCheckWinner(tttBoard);
+    if(winner){
+      tttGameOver = true;
+      document.getElementById('ttt-message').textContent = '你贏了！ 🎉';
+      return;
+    }
+    if(tttBoard.filter(Boolean).length === 9){
+      tttGameOver = true;
+      document.getElementById('ttt-message').textContent = '畫！ 🤝';
+      return;
+    }
+
+    document.getElementById('ttt-turn').textContent = '計算機正在思考...';
+    setTimeout(tttBotMove, 500);
+  }
+
+  function tttBotMove(){
+    var bestScore = -Infinity;
+    var bestMove = -1;
+    for(var i = 0; i < 9; i++){
+      if(!tttBoard[i]){
+        tttBoard[i] = BOT;
+        var score = tttMinimax(tttBoard, 0, false);
+        tttBoard[i] = '';
+        if(score > bestScore){
+          bestScore = score;
+          bestMove = i;
+        }
+      }
+    }
+    if(bestMove !== -1){
+      tttBoard[bestMove] = BOT;
+    }
+    renderTTT();
+
+    var winner = tttCheckWinner(tttBoard);
+    if(winner){
+      tttGameOver = true;
+      document.getElementById('ttt-message').textContent = '電腦贏了！再試一次 💪';
+      document.getElementById('ttt-turn').textContent = '';
+      return;
+    }
+    if(tttBoard.filter(Boolean).length === 9){
+      tttGameOver = true;
+      document.getElementById('ttt-message').textContent = '畫！ 🤝';
+      document.getElementById('ttt-turn').textContent = '';
+      return;
+    }
+    document.getElementById('ttt-turn').textContent = '輪到你了 (❌)';
+  }
+
+  function tttMinimax(board, depth, isMaximizing){
+    var winner = tttCheckWinner(board);
+    if(winner === BOT) return 10 - depth;
+    if(winner === HUMAN) return depth - 10;
+    if(board.filter(Boolean).length === 9) return 0;
+
+    if(isMaximizing){
+      var best = -Infinity;
+      for(var i = 0; i < 9; i++){
+        if(!board[i]){
+          board[i] = BOT;
+          best = Math.max(best, tttMinimax(board, depth + 1, false));
+          board[i] = '';
+        }
+      }
+      return best;
+    } else {
+      var worst = Infinity;
+      for(var j = 0; j < 9; j++){
+        if(!board[j]){
+          board[j] = HUMAN;
+          worst = Math.min(worst, tttMinimax(board, depth + 1, true));
+          board[j] = '';
+        }
+      }
+      return worst;
+    }
+  }
+
+  function tttCheckWinner(board){
+    var lines = [
+      [0,1,2],[3,4,5],[6,7,8],
+      [0,3,6],[1,4,7],[2,5,8],
+      [0,4,8],[2,4,6]
+    ];
+    for(var i = 0; i < lines.length; i++){
+      var a = lines[i][0], b = lines[i][1], c = lines[i][2];
+      if(board[a] && board[a] === board[b] && board[a] === board[c]){
+        return board[a];
+      }
+    }
+    return null;
+  }
+
+  function resetTTT(){
+    tttBoard = new Array(9).fill('');
+    tttGameOver = false;
+    document.getElementById('ttt-message').textContent = '';
+    document.getElementById('ttt-turn').textContent = '輪到你了 (❌)';
+    renderTTT();
+  }
+
+  // =========================================================
+  // MEMORY
+  // =========================================================
+  var memoryEmojis = ['🐱','🌸','⭐','🍡','💗','🎵'];
+  var memoryCards = [];
+  var memoryFlipped = [];
+  var memoryMatchedCount = 0;
+  var memoryAttemptsLeft = 10;
+  var memoryLocked = false;
+
+  function shuffle(arr){
+    for(var i = arr.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    }
+    return arr;
+  }
+
+  function renderMemory(){
+    var grid = document.getElementById('memory-grid');
+    grid.innerHTML = '';
+    memoryCards.forEach(function(card, i){
+      var el = document.createElement('div');
+      el.className = 'memory-card' + (card.matched ? ' matched' : '') + (card.flipped ? ' flipped' : '');
+      el.textContent = (card.flipped || card.matched) ? card.emoji : '❓';
+      el.onclick = function(){ memoryFlip(i); };
+      grid.appendChild(el);
+    });
+    document.getElementById('memory-stats').textContent = '嘗試次數已剩餘: ' + memoryAttemptsLeft;
+  }
+
+  function memoryFlip(index){
+    if(memoryLocked) return;
+    var card = memoryCards[index];
+    if(card.flipped || card.matched) return;
+    if(memoryFlipped.length === 2) return;
+
+    card.flipped = true;
+    memoryFlipped.push(index);
+    renderMemory();
+
+    if(memoryFlipped.length === 2){
+      memoryLocked = true;
+      var first = memoryCards[memoryFlipped[0]];
+      var second = memoryCards[memoryFlipped[1]];
+
+      if(first.emoji === second.emoji){
+        first.matched = true;
+        second.matched = true;
+        memoryMatchedCount += 2;
+        memoryFlipped = [];
+        memoryLocked = false;
+        renderMemory();
+        if(memoryMatchedCount === memoryCards.length){
+          document.getElementById('memory-message').textContent = '你贏了！找到所有配對 🎉';
+        }
+      } else {
+        memoryAttemptsLeft--;
+        setTimeout(function(){
+          first.flipped = false;
+          second.flipped = false;
+          memoryFlipped = [];
+          memoryLocked = false;
+          renderMemory();
+          if(memoryAttemptsLeft <= 0 && memoryMatchedCount < memoryCards.length){
+            document.getElementById('memory-message').textContent = '哎喲,輸了,你嘗試完了！ 😿';
+          }
+        }, 900);
+      }
+    }
+  }
+
+  function resetMemory(){
+    var deck = memoryEmojis.concat(memoryEmojis).map(function(e){
+      return { emoji: e, flipped: false, matched: false };
+    });
+    memoryCards = shuffle(deck);
+    memoryFlipped = [];
+    memoryMatchedCount = 0;
+    memoryAttemptsLeft = 10;
+    memoryLocked = false;
+    document.getElementById('memory-message').textContent = '';
+    renderMemory();
+  }
+
+  // =========================================================
+  // FIAMMIFERI (gioco del Nim) - Tu contro il computer
+  // Tu fai la prima mossa, poi il bot risponde da solo usando
+  // la strategia ottimale: lascia sempre un numero di fiammiferi
+  // pari a 1 (mod 4), cosi' vince quasi sempre.
+  // ---- Modifica nimSticksTotal per cambiare quanti fiammiferi ci sono all'inizio ----
+  // =========================================================
+  var nimSticksTotal = 15;
+  var nimSticksLeft = nimSticksTotal;
+  var nimGameOver = false;
+  var nimHumanTurn = true;
+
+  function renderNim(){
+    document.getElementById('nim-sticks').textContent = '🔥'.repeat(nimSticksLeft) || '—';
+    if(nimGameOver){
+      document.getElementById('nim-turn').textContent = '';
+    } else if(nimHumanTurn){
+      document.getElementById('nim-turn').textContent = '輪到你了';
+    } else {
+      document.getElementById('nim-turn').textContent = '計算機正在思考...';
+    }
+    var disableButtons = nimGameOver || !nimHumanTurn;
+    document.getElementById('nim-take-1').disabled = disableButtons || nimSticksLeft < 1;
+    document.getElementById('nim-take-2').disabled = disableButtons || nimSticksLeft < 2;
+    document.getElementById('nim-take-3').disabled = disableButtons || nimSticksLeft < 3;
+  }
+
+  function nimTake(amount){
+    if(nimGameOver || !nimHumanTurn || amount > nimSticksLeft) return;
+    nimSticksLeft -= amount;
+
+    if(nimSticksLeft === 0){
+      nimGameOver = true;
+      document.getElementById('nim-message').textContent = '你拿走了最後一根火柴...你輸了！ 😢 電腦贏了！';
+      renderNim();
+      return;
+    }
+
+    nimHumanTurn = false;
+    renderNim();
+    setTimeout(nimBotMove, 700);
+  }
+
+  function nimBotMove(){
+    if(nimGameOver) return;
+
+    var takeAmount = (nimSticksLeft - 1) % 4;
+    if(takeAmount === 0){
+      takeAmount = Math.floor(Math.random() * Math.min(3, nimSticksLeft)) + 1;
+    }
+    takeAmount = Math.min(takeAmount, nimSticksLeft, 3);
+    if(takeAmount < 1) takeAmount = 1;
+
+    nimSticksLeft -= takeAmount;
+
+    if(nimSticksLeft === 0){
+      nimGameOver = true;
+      document.getElementById('nim-message').textContent = '電腦拿走了最後一根火柴...電腦輸了！ 🎉 你贏了！';
+      renderNim();
+      return;
+    }
+
+    nimHumanTurn = true;
+    renderNim();
+  }
+
+  function resetNim(){
+    nimSticksLeft = nimSticksTotal;
+    nimGameOver = false;
+    nimHumanTurn = true;
+    document.getElementById('nim-message').textContent = '';
+    renderNim();
+  }
+
+  // Inizializza tutti i giochi al caricamento della pagina
+  resetTTT();
+  resetMemory();
+  resetNim();
+</script>
+
+</body>
+</html>
