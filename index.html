@@ -88,6 +88,51 @@
     100%{ transform: translateY(110vh) rotate(360deg); opacity: 0; }
   }
 
+  /* ---------- Modalita' notturna automatica (21:00-6:00) ---------- */
+  .night-only{ display:none; }
+  body.night-mode .night-only{ display:inline-block; }
+
+  body.night-mode .hero{
+    background:
+      radial-gradient(circle at 20% 15%, rgba(255,255,255,.15) 0%, transparent 2%),
+      radial-gradient(circle at 60% 25%, rgba(255,255,255,.12) 0%, transparent 1.5%),
+      radial-gradient(circle at 80% 60%, rgba(255,255,255,.1) 0%, transparent 1.5%),
+      radial-gradient(circle at 35% 75%, rgba(255,255,255,.13) 0%, transparent 1.5%),
+      linear-gradient(160deg, #1B1030 0%, #2D1B45 55%, #1F1435 100%);
+    transition: background 1s ease;
+  }
+  body.night-mode .hero h1,
+  body.night-mode .hero .eyebrow,
+  body.night-mode .hero .sub,
+  body.night-mode .hero .scroll-hint{
+    color: #F4E9FF;
+  }
+  body.night-mode .hero h1{ text-shadow: 0 4px 0 rgba(255,255,255,.18); }
+
+  .daynight-banner{
+    display:none;
+    text-align:center;
+    font-family:'Baloo 2';
+    font-weight:700;
+    font-size: 1rem;
+    color: var(--plum);
+    background: white;
+    border: 3px solid var(--plum);
+    border-radius: 999px;
+    padding: .55rem 1.3rem;
+    margin: 1.6rem auto 0;
+    max-width: 92%;
+    width: fit-content;
+    position: relative;
+    z-index: 6;
+  }
+  .daynight-banner.show{ display:block; }
+  body.night-mode .daynight-banner{
+    background: #2D1B45;
+    color: #F4E9FF;
+    border-color: #F4E9FF;
+  }
+
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
   body{
@@ -566,6 +611,70 @@
   }
   .nim-btn:disabled{ opacity:.4; cursor:default; }
 
+  /* ---------- Disegno ---------- */
+  .drawing-toolbar{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap: .7rem;
+    align-items:center;
+    margin-bottom: 1.2rem;
+  }
+  .color-palette{
+    display:flex;
+    flex-wrap:wrap;
+    gap: .4rem;
+    justify-content:center;
+  }
+  .color-swatch{
+    width: 30px; height:30px;
+    border-radius: 50%;
+    border: 3px solid var(--plum);
+    cursor:pointer;
+    padding:0;
+  }
+  .color-swatch.active{
+    box-shadow: 0 0 0 3px white, 0 0 0 6px var(--plum);
+  }
+  .tool-btn{
+    font-family:'Baloo 2';
+    font-weight:700;
+    font-size: .85rem;
+    border: 3px solid var(--plum);
+    background: white;
+    border-radius: 999px;
+    padding: .45rem 1rem;
+    cursor:pointer;
+    color: var(--plum);
+  }
+  .tool-btn.active{ background: var(--lavender); }
+  #draw-canvas{
+    background: white;
+    border: 3px solid var(--plum);
+    border-radius: 20px;
+    touch-action: none;
+    max-width: 100%;
+    cursor: crosshair;
+    display:block;
+    margin: 0 auto;
+  }
+  #drawing-result-img{
+    background: white;
+  }
+  .download-drawing-btn{
+    font-family:'Baloo 2';
+    font-weight:700;
+    border: 3px solid white;
+    background: var(--pink-deep);
+    color: white;
+    border-radius: 999px;
+    padding: .6rem 1.4rem;
+    cursor:pointer;
+    text-decoration:none;
+    display:inline-block;
+    margin-top: 1.2rem;
+  }
+
   /* ---------- Orologio Italia / Cina ---------- */
   .clocks-grid{
     display:grid;
@@ -606,6 +715,8 @@
     padding: 2.6rem 1.5rem;
     text-align:center;
     background: linear-gradient(135deg, var(--pink) 0%, var(--lavender) 60%, var(--butter) 100%);
+    position: relative;
+    overflow: hidden;
   }
   .special-formula{
     font-family:'Baloo 2';
@@ -620,11 +731,6 @@
     font-size: 2rem;
     color: var(--pink-deep);
     margin-bottom: 1.6rem;
-  }
-
-  .special-box{
-    position: relative;
-    overflow: hidden;
   }
   .confetti-piece{
     position: absolute;
@@ -676,12 +782,17 @@
   <span class="sticker" style="bottom:14%; right:10%; animation-delay:1.5s;">🍡</span>
   <span class="sticker" style="top:35%; left:6%; animation-delay:.7s;">🖤</span>
   <span class="sticker" style="top:40%; right:8%; animation-delay:2.3s;">🖤</span>
+  <span class="sticker night-only" style="top:8%; left:20%; animation-delay:.5s;">🌙</span>
+  <span class="sticker night-only" style="top:15%; right:22%; animation-delay:1.9s;">⭐</span>
+  <span class="sticker night-only" style="bottom:30%; left:14%; animation-delay:2.8s;">✨</span>
+  <span class="sticker night-only" style="bottom:25%; right:16%; animation-delay:1.2s;">⭐</span>
 
   <div class="eyebrow">網路的一個小角落</div>
   <div class="valentine-banner" id="valentine-banner"></div>
   <h1>詩雨💕</h1>
   <p class="sub">只為你。一個不錯的小地方,我把我們中的一些人安置在那裡。</p>
   <div class="heart">💗🖤</div>
+  <div class="daynight-banner" id="daynight-banner"></div>
   <div class="scroll-hint">向下捲動 ↓</div>
 
   <div class="theme-switcher">
@@ -885,6 +996,7 @@
     <button class="game-tab active" onclick="showGame('ttt')" id="tab-ttt">✖️⭕ 特里斯</button>
     <button class="game-tab" onclick="showGame('memory')" id="tab-memory">🃏 記憶</button>
     <button class="game-tab" onclick="showGame('nim')" id="tab-nim">🔥 比賽</button>
+    <button class="game-tab" onclick="showGame('draw')" id="tab-draw">🎨 畫畫</button>
   </div>
 
   <!-- Tris -->
@@ -926,7 +1038,39 @@
     <div class="game-message" id="nim-message"></div>
     <button class="game-reset" onclick="resetNim()">重新開始</button>
   </div>
+
+  <!-- Disegno -->
+  <div class="game-panel card game-box" id="panel-draw">
+    <div class="drawing-toolbar">
+      <div class="color-palette" id="color-palette">
+        <button class="color-swatch active" style="background:#4A2545;" onclick="setDrawColor('#4A2545', this)"></button>
+        <button class="color-swatch" style="background:#FF4D6D;" onclick="setDrawColor('#FF4D6D', this)"></button>
+        <button class="color-swatch" style="background:#FF9FCB;" onclick="setDrawColor('#FF9FCB', this)"></button>
+        <button class="color-swatch" style="background:#FF9F45;" onclick="setDrawColor('#FF9F45', this)"></button>
+        <button class="color-swatch" style="background:#FFD93D;" onclick="setDrawColor('#FFD93D', this)"></button>
+        <button class="color-swatch" style="background:#6BCB77;" onclick="setDrawColor('#6BCB77', this)"></button>
+        <button class="color-swatch" style="background:#4ECDC4;" onclick="setDrawColor('#4ECDC4', this)"></button>
+        <button class="color-swatch" style="background:#4D96FF;" onclick="setDrawColor('#4D96FF', this)"></button>
+        <button class="color-swatch" style="background:#9B5DE5;" onclick="setDrawColor('#9B5DE5', this)"></button>
+        <button class="color-swatch" style="background:#8B5E3C;" onclick="setDrawColor('#8B5E3C', this)"></button>
+      </div>
+      <button class="tool-btn active" id="pen-tool-btn" onclick="setDrawTool('pen')">✏️ 畫筆</button>
+      <button class="tool-btn" id="eraser-tool-btn" onclick="setDrawTool('eraser')">🧹 橡皮擦</button>
+      <button class="tool-btn" onclick="clearCanvas()">🗑️ 清除</button>
+    </div>
+    <canvas id="draw-canvas" width="360" height="360"></canvas>
+    <button class="game-reset" onclick="finishDrawing()" style="margin-top:1.2rem;">🎉 完成!</button>
+  </div>
 </section>
+
+<div class="lightbox" id="drawing-lightbox" onclick="closeDrawingLightbox(event)">
+  <button class="lightbox-close" onclick="closeDrawingLightbox(event)">✕</button>
+  <div class="lightbox-content" onclick="event.stopPropagation()">
+    <img id="drawing-result-img" src="" alt="妳的畫作">
+    <div class="lightbox-caption">妳的作品完成了 🎉</div>
+    <a id="download-drawing-link" class="download-drawing-btn" download="我的畫作.png">⬇️ 下載圖片</a>
+  </div>
+</div>
 
 <section id="playlist">
   <div class="section-kicker">你的配樂</div>
@@ -1032,6 +1176,48 @@
   });
 
   // =========================================================
+  // MODALITA' NOTTE + MESSAGGI BUONGIORNO/BUONANOTTE
+  // (definiti qui, PRIMA di setTheme, perche' setTheme li richiama subito)
+  // =========================================================
+  var nightMessages = [
+    '晚安,我的愛人,做個好夢 🌙💤',
+    '今天也辛苦了,早點休息哦 😴🖤',
+    '想你想到要睡著了,晚安 💗🌛',
+    '星星都出來了,你也該休息啦 ⭐😴',
+    '晚安啦,明天見 🌙💕',
+    '閉上眼睛,想我一下下再睡 😌🖤',
+    '願你今晚睡得香甜,晚安 🌜💗',
+    '一天結束了,抱抱,晚安 🤗🌙',
+    '記得蓋被子,晚安寶貝 🛏️💕',
+    '星空下想著你,晚安 ✨🌙'
+  ];
+  var morningMessages = [
+    '早安!新的一天開始囉 ☀️💗',
+    '醒來第一件事就是想你,早安 😊🌞',
+    '早安,今天也要元氣滿滿哦 💪☀️',
+    '太陽出來了,你也快起床啦 🌅😆',
+    '早安,記得吃早餐哦 🍳☀️',
+    '新的一天,新的想念,早安 💕🌤️',
+    '早安啊,今天也要開心過哦 😄🌞',
+    '睜開眼就想到你,早安 🥰☀️',
+    '早安,願你今天順順利利 🌻💗',
+    '一早就想跟你說早安 ☀️🖤'
+  ];
+
+  function updateDayNightMode(){
+    var now = new Date();
+    var hour = now.getHours();
+    var isNight = (hour >= 21 || hour < 6);
+
+    document.body.classList.toggle('night-mode', isNight);
+
+    var dayIndex = Math.floor(now.getTime() / 86400000) % 10;
+    var banner = document.getElementById('daynight-banner');
+    banner.textContent = isNight ? nightMessages[dayIndex] : morningMessages[dayIndex];
+    banner.classList.add('show');
+  }
+
+  // =========================================================
   // TEMI: cambiano solo i colori d'accento, non toccano i testi
   // =========================================================
   function setTheme(name){
@@ -1040,6 +1226,7 @@
       document.getElementById('theme-btn-' + t).classList.toggle('active', t === name);
     });
     try{ localStorage.setItem('shiyuSiteTheme', name); }catch(e){}
+    updateDayNightMode();
   }
 
   (function initTheme(){
@@ -1086,6 +1273,9 @@
   }
 
   checkValentineSurprise();
+
+  updateDayNightMode();
+  setInterval(updateDayNightMode, 30000);
 
   var startDate = new Date('2026-08-01T00:00:00');
 
@@ -1215,7 +1405,7 @@
   setInterval(updateSpecialCountdown, 1000);
 
   function showGame(name){
-    ['ttt','memory','nim'].forEach(function(g){
+    ['ttt','memory','nim','draw'].forEach(function(g){
       document.getElementById('panel-'+g).classList.toggle('active', g === name);
       document.getElementById('tab-'+g).classList.toggle('active', g === name);
     });
@@ -1577,6 +1767,101 @@
   resetTTT();
   resetMemory();
   resetNim();
+  initDrawing();
+
+  // =========================================================
+  // DISEGNO: lavagna con matita, gomma, tavolozza colori
+  // =========================================================
+  var drawCanvas, drawCtx;
+  var isDrawing = false;
+  var currentColor = '#4A2545';
+  var currentTool = 'pen';
+  var brushSize = 6;
+  var lastX = 0, lastY = 0;
+
+  function initDrawing(){
+    drawCanvas = document.getElementById('draw-canvas');
+    drawCtx = drawCanvas.getContext('2d');
+
+    drawCtx.fillStyle = '#FFFFFF';
+    drawCtx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
+    drawCtx.lineCap = 'round';
+    drawCtx.lineJoin = 'round';
+
+    drawCanvas.addEventListener('mousedown', function(e){ startDraw(e); });
+    drawCanvas.addEventListener('mousemove', function(e){ draw(e); });
+    drawCanvas.addEventListener('mouseup', stopDraw);
+    drawCanvas.addEventListener('mouseleave', stopDraw);
+
+    drawCanvas.addEventListener('touchstart', function(e){ e.preventDefault(); startDraw(e.touches[0]); }, { passive: false });
+    drawCanvas.addEventListener('touchmove', function(e){ e.preventDefault(); draw(e.touches[0]); }, { passive: false });
+    drawCanvas.addEventListener('touchend', function(e){ e.preventDefault(); stopDraw(); }, { passive: false });
+  }
+
+  function getCanvasPos(e){
+    var rect = drawCanvas.getBoundingClientRect();
+    var scaleX = drawCanvas.width / rect.width;
+    var scaleY = drawCanvas.height / rect.height;
+    return {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY
+    };
+  }
+
+  function startDraw(e){
+    isDrawing = true;
+    var pos = getCanvasPos(e);
+    lastX = pos.x;
+    lastY = pos.y;
+  }
+
+  function draw(e){
+    if(!isDrawing) return;
+    var pos = getCanvasPos(e);
+    drawCtx.strokeStyle = (currentTool === 'eraser') ? '#FFFFFF' : currentColor;
+    drawCtx.lineWidth = (currentTool === 'eraser') ? brushSize * 3 : brushSize;
+    drawCtx.beginPath();
+    drawCtx.moveTo(lastX, lastY);
+    drawCtx.lineTo(pos.x, pos.y);
+    drawCtx.stroke();
+    lastX = pos.x;
+    lastY = pos.y;
+  }
+
+  function stopDraw(){
+    isDrawing = false;
+  }
+
+  function setDrawColor(color, btnEl){
+    currentColor = color;
+    currentTool = 'pen';
+    document.querySelectorAll('.color-swatch').forEach(function(el){ el.classList.remove('active'); });
+    btnEl.classList.add('active');
+    document.getElementById('pen-tool-btn').classList.add('active');
+    document.getElementById('eraser-tool-btn').classList.remove('active');
+  }
+
+  function setDrawTool(tool){
+    currentTool = tool;
+    document.getElementById('pen-tool-btn').classList.toggle('active', tool === 'pen');
+    document.getElementById('eraser-tool-btn').classList.toggle('active', tool === 'eraser');
+  }
+
+  function clearCanvas(){
+    drawCtx.fillStyle = '#FFFFFF';
+    drawCtx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
+  }
+
+  function finishDrawing(){
+    var dataUrl = drawCanvas.toDataURL('image/png');
+    document.getElementById('drawing-result-img').src = dataUrl;
+    document.getElementById('download-drawing-link').href = dataUrl;
+    document.getElementById('drawing-lightbox').classList.add('open');
+  }
+
+  function closeDrawingLightbox(event){
+    document.getElementById('drawing-lightbox').classList.remove('open');
+  }
 </script>
 
 </body>
