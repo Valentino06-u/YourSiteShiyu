@@ -624,16 +624,24 @@
   }
   .color-palette{
     display:flex;
-    flex-wrap:wrap;
-    gap: .4rem;
+    flex-direction:column;
+    gap: .35rem;
+    max-height: 210px;
+    overflow-y: auto;
+    padding: .3rem .2rem;
+  }
+  .color-row{
+    display:flex;
+    gap: .35rem;
     justify-content:center;
   }
   .color-swatch{
-    width: 30px; height:30px;
+    width: 26px; height:26px;
     border-radius: 50%;
     border: 3px solid var(--plum);
     cursor:pointer;
     padding:0;
+    flex-shrink:0;
   }
   .color-swatch.active{
     box-shadow: 0 0 0 3px white, 0 0 0 6px var(--plum);
@@ -1106,18 +1114,7 @@
   <!-- Disegno -->
   <div class="game-panel card game-box" id="panel-draw">
     <div class="drawing-toolbar">
-      <div class="color-palette" id="color-palette">
-        <button class="color-swatch active" style="background:#4A2545;" onclick="setDrawColor('#4A2545', this)"></button>
-        <button class="color-swatch" style="background:#FF4D6D;" onclick="setDrawColor('#FF4D6D', this)"></button>
-        <button class="color-swatch" style="background:#FF9FCB;" onclick="setDrawColor('#FF9FCB', this)"></button>
-        <button class="color-swatch" style="background:#FF9F45;" onclick="setDrawColor('#FF9F45', this)"></button>
-        <button class="color-swatch" style="background:#FFD93D;" onclick="setDrawColor('#FFD93D', this)"></button>
-        <button class="color-swatch" style="background:#6BCB77;" onclick="setDrawColor('#6BCB77', this)"></button>
-        <button class="color-swatch" style="background:#4ECDC4;" onclick="setDrawColor('#4ECDC4', this)"></button>
-        <button class="color-swatch" style="background:#4D96FF;" onclick="setDrawColor('#4D96FF', this)"></button>
-        <button class="color-swatch" style="background:#9B5DE5;" onclick="setDrawColor('#9B5DE5', this)"></button>
-        <button class="color-swatch" style="background:#8B5E3C;" onclick="setDrawColor('#8B5E3C', this)"></button>
-      </div>
+      <div class="color-palette" id="color-palette"></div>
       <button class="tool-btn active" id="pen-tool-btn" onclick="setDrawTool('pen')">✏️ 畫筆</button>
       <button class="tool-btn" id="eraser-tool-btn" onclick="setDrawTool('eraser')">🧹 橡皮擦</button>
       <button class="tool-btn" onclick="clearCanvas()">🗑️ 清除</button>
@@ -1908,6 +1905,51 @@
     drawCanvas.addEventListener('touchstart', function(e){ e.preventDefault(); startDraw(e.touches[0]); }, { passive: false });
     drawCanvas.addEventListener('touchmove', function(e){ e.preventDefault(); draw(e.touches[0]); }, { passive: false });
     drawCanvas.addEventListener('touchend', function(e){ e.preventDefault(); stopDraw(); }, { passive: false });
+
+    buildColorPalette();
+  }
+
+  function buildColorPalette(){
+    var container = document.getElementById('color-palette');
+    container.innerHTML = '';
+
+    // Una riga per ogni tonalita', dalla piu' chiara alla piu' scura
+    var hues = [345, 15, 35, 50, 120, 165, 195, 225, 265, 300];
+    var lightnesses = [82, 65, 50, 35, 20];
+    var firstSwatch = null;
+
+    hues.forEach(function(hue){
+      var row = document.createElement('div');
+      row.className = 'color-row';
+      lightnesses.forEach(function(light){
+        var color = 'hsl(' + hue + ', 75%, ' + light + '%)';
+        var btn = document.createElement('button');
+        btn.className = 'color-swatch';
+        btn.style.background = color;
+        btn.onclick = function(){ setDrawColor(color, btn); };
+        row.appendChild(btn);
+        if(!firstSwatch) firstSwatch = null;
+      });
+      container.appendChild(row);
+    });
+
+    // Riga finale: dal bianco al nero
+    var grayRow = document.createElement('div');
+    grayRow.className = 'color-row';
+    var grays = ['#FFFFFF', '#CCCCCC', '#888888', '#4A2545', '#000000'];
+    var defaultBtn = null;
+    grays.forEach(function(color){
+      var btn = document.createElement('button');
+      btn.className = 'color-swatch';
+      btn.style.background = color;
+      btn.onclick = function(){ setDrawColor(color, btn); };
+      grayRow.appendChild(btn);
+      if(color === '#4A2545') defaultBtn = btn;
+    });
+    container.appendChild(grayRow);
+
+    // Colore di default: quello scuro "prugna" gia' usato nel resto del sito
+    if(defaultBtn){ setDrawColor('#4A2545', defaultBtn); }
   }
 
   var drawZoom = 1;
