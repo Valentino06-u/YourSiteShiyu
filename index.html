@@ -397,6 +397,8 @@
   .countdown-box{
     padding: 2.4rem 1.5rem;
     text-align:center;
+    position: relative;
+    overflow: hidden;
   }
   .countdown-grid{
     display:flex;
@@ -653,10 +655,39 @@
     border: 3px solid var(--plum);
     border-radius: 20px;
     touch-action: none;
-    max-width: 100%;
     cursor: crosshair;
     display:block;
+    transform-origin: center center;
+  }
+  .draw-canvas-wrap{
+    width: 360px;
+    height: 360px;
+    max-width: 100%;
     margin: 0 auto;
+    overflow: auto;
+    border-radius: 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .zoom-controls{
+    display:flex;
+    gap: .5rem;
+    align-items:center;
+  }
+  .zoom-btn{
+    font-family:'Baloo 2';
+    font-weight:800;
+    font-size: 1.1rem;
+    width: 38px; height: 38px;
+    border: 3px solid var(--plum);
+    background: white;
+    border-radius: 50%;
+    cursor:pointer;
+    color: var(--plum);
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
   #drawing-result-img{
     background: white;
@@ -760,6 +791,21 @@
   .celebration-message p{
     color: var(--plum-soft);
     font-weight: 700;
+  }
+
+  .month-poem{
+    margin-top: 1.4rem;
+    padding: 1.4rem 1.6rem;
+    background: rgba(255,255,255,.6);
+    border-radius: 20px;
+    border: 2px dashed var(--pink-deep);
+  }
+  .month-poem p{
+    font-family: 'Baloo 2';
+    font-weight: 600;
+    color: var(--plum);
+    line-height: 2;
+    font-size: 1.02rem;
   }
 
   footer{
@@ -926,6 +972,24 @@
   <div class="countdown-box card">
     <p class="section-sub" style="margin-bottom:0;">每多一天都是一份禮物🎁</p>
     <div class="countdown-grid" id="countdown-grid"></div>
+    <div class="celebration-message" id="month-celebration">
+      <h3>🎉 我們的第一個月紀念日 🎉</h3>
+      <p>三十天,說長不長,說短不短,卻是我最珍惜的時光 💕</p>
+      <p>謝謝妳給我這個機會,讓我陪在妳身邊。我會繼續努力,做那個能讓妳安心又開心的人 🖤</p>
+      <div class="month-poem">
+        <p>
+          一個月,不長也不短,<br>
+          卻是我最珍惜的時光。<br>
+          謝謝妳給我這個機會,<br>
+          讓我能陪在妳身旁。<br><br>
+          妳笑的時候,世界都亮了,<br>
+          妳難過的時候,我也跟著心疼。<br>
+          往後的日子還很長,<br>
+          我想一直牽著妳的手,慢慢走。🐈‍⬛🐈‍⬛
+        </p>
+      </div>
+    </div>
+    <div id="month-confetti-container"></div>
   </div>
 </section>
 
@@ -1057,8 +1121,14 @@
       <button class="tool-btn active" id="pen-tool-btn" onclick="setDrawTool('pen')">✏️ 畫筆</button>
       <button class="tool-btn" id="eraser-tool-btn" onclick="setDrawTool('eraser')">🧹 橡皮擦</button>
       <button class="tool-btn" onclick="clearCanvas()">🗑️ 清除</button>
+      <div class="zoom-controls">
+        <button class="zoom-btn" onclick="zoomDraw(-0.2)">−</button>
+        <button class="zoom-btn" onclick="zoomDraw(0.2)">+</button>
+      </div>
     </div>
-    <canvas id="draw-canvas" width="360" height="360"></canvas>
+    <div class="draw-canvas-wrap">
+      <canvas id="draw-canvas" width="360" height="360"></canvas>
+    </div>
     <button class="game-reset" onclick="finishDrawing()" style="margin-top:1.2rem;">🎉 完成!</button>
   </div>
 </section>
@@ -1304,6 +1374,48 @@
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
+
+  // =========================================================
+  // PRIMO MESE INSIEME: sorpresa speciale dal 30 agosto (dall'inizio
+  // della giornata) fino al 31 agosto alle 6 del mattino.
+  // =========================================================
+  var monthConfettiLaunched = false;
+
+  function checkMonthAnniversary(){
+    var now = new Date();
+    var start = new Date(2026, 7, 30, 0, 0, 0);  // 30 agosto 2026, mezzanotte
+    var end = new Date(2026, 7, 31, 6, 0, 0);    // 31 agosto 2026, ore 6:00
+    var isActive = (now >= start && now < end);
+
+    var el = document.getElementById('month-celebration');
+    if(isActive){
+      el.classList.add('show');
+      if(!monthConfettiLaunched){
+        monthConfettiLaunched = true;
+        launchMonthConfetti();
+        launchSiteConfetti();
+      }
+    } else {
+      el.classList.remove('show');
+    }
+  }
+
+  function launchMonthConfetti(){
+    var container = document.getElementById('month-confetti-container');
+    var pieces = ['💗','🖤','✨','🎉','🌸','⭐','💕'];
+    for(var i = 0; i < 24; i++){
+      var span = document.createElement('span');
+      span.className = 'confetti-piece';
+      span.textContent = pieces[Math.floor(Math.random() * pieces.length)];
+      span.style.left = (Math.random() * 100) + '%';
+      span.style.animationDuration = (2.5 + Math.random() * 2.5) + 's';
+      span.style.animationDelay = (Math.random() * 3) + 's';
+      container.appendChild(span);
+    }
+  }
+
+  checkMonthAnniversary();
+  setInterval(checkMonthAnniversary, 30000);
 
   // =========================================================
   // OROLOGIO: Italia e Cina in tempo reale
@@ -1796,6 +1908,13 @@
     drawCanvas.addEventListener('touchstart', function(e){ e.preventDefault(); startDraw(e.touches[0]); }, { passive: false });
     drawCanvas.addEventListener('touchmove', function(e){ e.preventDefault(); draw(e.touches[0]); }, { passive: false });
     drawCanvas.addEventListener('touchend', function(e){ e.preventDefault(); stopDraw(); }, { passive: false });
+  }
+
+  var drawZoom = 1;
+
+  function zoomDraw(delta){
+    drawZoom = Math.min(2.5, Math.max(0.6, drawZoom + delta));
+    drawCanvas.style.transform = 'scale(' + drawZoom + ')';
   }
 
   function getCanvasPos(e){
