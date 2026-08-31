@@ -816,6 +816,25 @@
     font-size: 1.02rem;
   }
 
+  /* ---------- Messaggio temporaneo: in bocca al lupo per l'esame ---------- */
+  .temp-message-section{ display:none; }
+  .temp-message-section.show{ display:block; }
+  .exam-support-box{
+    padding: 2.4rem 1.8rem;
+    background: linear-gradient(135deg, var(--butter) 0%, var(--pink) 55%, var(--lavender) 100%);
+  }
+  .exam-support-box p{
+    font-family: 'Baloo 2';
+    font-weight: 600;
+    color: var(--plum);
+    line-height: 2;
+    font-size: 1.08rem;
+    white-space: pre-line;
+    text-align:center;
+    max-width: 34rem;
+    margin: 0 auto;
+  }
+
   footer{
     text-align:center;
     padding: 3rem 1.5rem 4rem;
@@ -864,6 +883,33 @@
     </button>
   </div>
 </div>
+
+<!-- ============================================================
+     MESSAGGIO TEMPORANEO: in bocca al lupo per l'esame
+     Visibile solo dal 31/8 al 1/9 (fino alle 13:00), poi sparisce da solo
+============================================================ -->
+<section id="exam-support" class="temp-message-section">
+  <span class="sticker" style="top:6%; left:8%; animation-delay:.3s;">💪</span>
+  <span class="sticker" style="top:10%; right:10%; animation-delay:1.7s;">✨</span>
+  <span class="sticker" style="bottom:8%; left:12%; animation-delay:2.2s;">🖤</span>
+  <span class="sticker" style="bottom:12%; right:8%; animation-delay:1s;">🎨</span>
+
+  <div class="section-kicker">考試加油</div>
+  <h2 class="section-title">明天,妳一定可以的</h2>
+
+  <div class="card exam-support-box">
+    <p>親愛的,
+
+明天就是妳的考試了。
+我真的真的相信妳,妳的能力沒有極限,妳很優秀,一點也不比任何人差。
+不管什麼理由,請永遠不要覺得自己比別人差,妳真的很棒。
+
+放輕鬆,深呼吸,把妳擁有的都展現出來就好。
+不管結果怎麼樣,我都會一樣愛妳,永遠支持妳。
+
+明天一切都會順利的,加油,我最愛的畫家 🎨🖤💪</p>
+  </div>
+</section>
 
 <section id="foto">
   <div class="section-kicker">一刻一刻</div>
@@ -1413,6 +1459,22 @@
 
   checkMonthAnniversary();
   setInterval(checkMonthAnniversary, 30000);
+
+  // =========================================================
+  // MESSAGGIO TEMPORANEO: in bocca al lupo per l'esame
+  // Visibile dal 31 agosto (dall'inizio della giornata) fino
+  // al 1 settembre alle 13:00, poi sparisce da solo.
+  // =========================================================
+  function checkExamSupport(){
+    var now = new Date();
+    var start = new Date(2026, 7, 31, 0, 0, 0);  // 31 agosto 2026, mezzanotte
+    var end = new Date(2026, 8, 1, 23, 0, 0);    // 1 settembre 2026, ore 23:00
+    var isActive = (now >= start && now < end);
+    document.getElementById('exam-support').classList.toggle('show', isActive);
+  }
+
+  checkExamSupport();
+  setInterval(checkExamSupport, 30000);
 
   // =========================================================
   // OROLOGIO: Italia e Cina in tempo reale
