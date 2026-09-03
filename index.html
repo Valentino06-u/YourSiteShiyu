@@ -835,6 +835,84 @@
     margin: 0 auto;
   }
 
+  /* ---------- Messaggio temporaneo: anniversario del primo bacio ---------- */
+  .kiss-box{
+    position: relative;
+    overflow: hidden;
+    padding: 2.2rem 1.2rem;
+    text-align:center;
+  }
+  .kiss-box p{
+    font-family: 'Baloo 2';
+    font-weight: 600;
+    color: var(--plum);
+    line-height: 1.9;
+    font-size: 1.05rem;
+    max-width: 30rem;
+    margin: 0 auto 1.4rem;
+  }
+  .kiss-photo{
+    max-width: 320px;
+    width: 100%;
+    border-radius: 24px;
+    border: 4px solid var(--plum);
+    box-shadow: 0 10px 0 rgba(255,159,203,.35);
+    display:block;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><text y='32' font-size='32'>%F0%9F%92%8B</text></svg>") 16 16, pointer;
+  }
+  .kiss-click-heart{
+    position: absolute;
+    font-size: 1.5rem;
+    pointer-events: none;
+    z-index: 4;
+    transform: translate(-50%, -50%);
+    animation: kiss-burst .9s ease-out forwards;
+  }
+  @keyframes kiss-burst{
+    0%{ transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    55%{ transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2); opacity: 1; }
+    100%{ transform: translate(calc(-50% + var(--dx) * 1.5), calc(-50% + var(--dy) * 1.5)) scale(.5); opacity: 0; }
+  }
+  .kiss-text-pop{
+    position: absolute;
+    font-family: 'Baloo 2';
+    font-weight: 800;
+    font-size: .95rem;
+    color: var(--pink-deep);
+    background: white;
+    border: 2px solid var(--plum);
+    border-radius: 999px;
+    padding: .35rem .9rem;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 5;
+    transform: translate(-50%, -50%);
+    animation: kiss-text-float 1.7s ease-out forwards;
+  }
+  @keyframes kiss-text-float{
+    0%{ transform: translate(-50%, -50%) translateY(0) scale(.5); opacity: 0; }
+    20%{ transform: translate(-50%, -50%) translateY(-10px) scale(1.05); opacity: 1; }
+    80%{ transform: translate(-50%, -50%) translateY(-45px) scale(1); opacity: 1; }
+    100%{ transform: translate(-50%, -50%) translateY(-65px) scale(.9); opacity: 0; }
+  }
+  .kiss-pop{
+    position: absolute;
+    font-size: 1.8rem;
+    animation: kiss-pop-anim 1.6s ease-out forwards;
+    pointer-events: none;
+    z-index: 3;
+  }
+  @keyframes kiss-pop-anim{
+    0%{ transform: scale(0) rotate(0deg); opacity: 0; }
+    30%{ transform: scale(1.3) rotate(-10deg); opacity: 1; }
+    70%{ transform: scale(1) rotate(5deg); opacity: 1; }
+    100%{ transform: scale(.6) translateY(-30px) rotate(15deg); opacity: 0; }
+  }
+
   footer{
     text-align:center;
     padding: 3rem 1.5rem 4rem;
@@ -908,6 +986,28 @@
 不管結果怎麼樣,我都會一樣愛妳,永遠支持妳。
 
 明天一切都會順利的,加油,我最愛的畫家 🎨🖤💪</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     MESSAGGIO TEMPORANEO: anniversario del primo bacio (seggiolino 💋)
+     Visibile solo oggi, fino a domani alle 6 del mattino
+============================================================ -->
+<section id="kiss-anniversary" class="temp-message-section">
+  <span class="sticker" style="top:6%; left:9%; animation-delay:.4s;">💋</span>
+  <span class="sticker" style="top:10%; right:9%; animation-delay:1.6s;">💗</span>
+  <span class="sticker" style="bottom:8%; left:11%; animation-delay:2.1s;">🖤</span>
+  <span class="sticker" style="bottom:12%; right:10%; animation-delay:1.1s;">💋</span>
+
+  <div class="section-kicker">一個月前的今天</div>
+  <h2 class="section-title">我們的第一個吻 💋</h2>
+
+  <div class="card kiss-box" id="kiss-box">
+    <p>一個月前的今天,我們接吻了。
+那天我太害羞了,結果在車上不小心親了好幾次...汽車座椅哈哈 🚗😳
+所以就有了這張梗圖,今天特別拿出來紀念一下 😂🖤</p>
+    <img src="foto/seggiolino.jpeg" alt="親吻座椅的梗圖" class="kiss-photo" onclick="kissPhotoClick(event)">
+    <audio id="kiss-audio" src="audio/kiss-sound.mp3" preload="auto"></audio>
   </div>
 </section>
 
@@ -1475,6 +1575,102 @@
 
   checkExamSupport();
   setInterval(checkExamSupport, 30000);
+
+  // =========================================================
+  // MESSAGGIO TEMPORANEO: anniversario del primo bacio
+  // Visibile solo oggi, fino a domani alle 6 del mattino.
+  // ---- Modifica le due date qui sotto se vuoi cambiare la finestra ----
+  // =========================================================
+  var kissPopInterval = null;
+
+  function checkKissAnniversary(){
+    var now = new Date();
+    var start = new Date(2026, 8, 3, 0, 0, 0);  // 3 settembre 2026, mezzanotte
+    var end = new Date(2026, 8, 4, 6, 0, 0);    // 4 settembre 2026, ore 6:00
+    var isActive = (now >= start && now < end);
+
+    document.getElementById('kiss-anniversary').classList.toggle('show', isActive);
+
+    if(isActive && !kissPopInterval){
+      kissPopInterval = setInterval(launchKissPop, 1100);
+    } else if(!isActive && kissPopInterval){
+      clearInterval(kissPopInterval);
+      kissPopInterval = null;
+    }
+  }
+
+  function launchKissPop(){
+    var container = document.getElementById('kiss-box');
+    if(!container) return;
+    var span = document.createElement('span');
+    span.className = 'kiss-pop';
+    span.textContent = Math.random() < 0.5 ? '💋' : '💗';
+    span.style.left = (8 + Math.random() * 80) + '%';
+    span.style.top = (5 + Math.random() * 75) + '%';
+    container.appendChild(span);
+    setTimeout(function(){ span.remove(); }, 1600);
+  }
+
+  // ---- Suono del bacio: usa il file audio vero caricato nel progetto ----
+  function playKissSound(){
+    var audio = document.getElementById('kiss-audio');
+    if(!audio) return;
+    try{
+      audio.currentTime = 0;
+      audio.play().catch(function(){ /* il browser a volte blocca l'autoplay finche' non c'e' un click: qui c'e' gia', quindi va bene */ });
+    }catch(e){ /* va bene lo stesso se qualcosa non va */ }
+  }
+
+  // ---- Frasi che compaiono e svaniscono al click ----
+  var kissPhrases = [
+    '我很喜歡妳 💗',
+    '我愛妳 🖤',
+    '妳是我的最愛 💕',
+    '如果妳感到孤單,請和我在一起 🥺',
+    '我會永遠愛妳,寶貝 💗',
+    '我的靈魂只屬於妳 🖤'
+  ];
+
+  // ---- Cuoricini e scritte che compaiono dal punto cliccato ----
+  function kissPhotoClick(event){
+    playKissSound();
+    var container = document.getElementById('kiss-box');
+    var rect = container.getBoundingClientRect();
+    var clickX = event.clientX - rect.left;
+    var clickY = event.clientY - rect.top;
+    var xPercent = (clickX / rect.width) * 100;
+    var yPercent = (clickY / rect.height) * 100;
+    var hearts = ['💗','❤️','🖤','💕'];
+
+    for(var i = 0; i < 7; i++){
+      var heart = document.createElement('span');
+      heart.className = 'kiss-click-heart';
+      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = xPercent + '%';
+      heart.style.top = yPercent + '%';
+      var angle = Math.random() * 360;
+      var dist = 35 + Math.random() * 35;
+      heart.style.setProperty('--dx', (Math.cos(angle * Math.PI / 180) * dist) + 'px');
+      heart.style.setProperty('--dy', (Math.sin(angle * Math.PI / 180) * dist) + 'px');
+      container.appendChild(heart);
+      (function(el){
+        setTimeout(function(){ el.remove(); }, 900);
+      })(heart);
+    }
+
+    var textPop = document.createElement('span');
+    textPop.className = 'kiss-text-pop';
+    textPop.textContent = kissPhrases[Math.floor(Math.random() * kissPhrases.length)];
+    textPop.style.left = xPercent + '%';
+    textPop.style.top = Math.max(8, yPercent - 6) + '%';
+    container.appendChild(textPop);
+    (function(el){
+      setTimeout(function(){ el.remove(); }, 1700);
+    })(textPop);
+  }
+
+  checkKissAnniversary();
+  setInterval(checkKissAnniversary, 30000);
 
   // =========================================================
   // OROLOGIO: Italia e Cina in tempo reale
