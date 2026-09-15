@@ -1402,7 +1402,17 @@
     '願你今晚睡得香甜,晚安 🌜💗',
     '一天結束了,抱抱,晚安 🤗🌙',
     '記得蓋被子,晚安寶貝 🛏️💕',
-    '星空下想著你,晚安 ✨🌙'
+    '星空下想著你,晚安 ✨🌙',
+    '雖然隔著螢幕,晚安吻還是要送到 😘🌙',
+    '時差再遠,想你的心一樣近,晚安 🌏🖤',
+    '今天想你想了好多次,晚安啦 💭💗',
+    '希望妳夢裡也有我,晚安 🌙🐈\u200d⬛',
+    '不管妳在哪裡,我都陪著妳入睡,晚安 🌌💕',
+    '晚安,明天也要好好照顧自己哦 🥰🌙',
+    '月亮這麼美,可惜不能一起看,晚安 🌕💗',
+    '今天辛苦妳了,好好睡一覺,晚安寶貝 😴🖤',
+    '想妳的訊息傳過去,晚安啦 📱💕',
+    '就算隔著海,我還是最想妳,晚安 🌊🌙'
   ];
   var morningMessages = [
     '早安!新的一天開始囉 ☀️💗',
@@ -1414,8 +1424,21 @@
     '早安啊,今天也要開心過哦 😄🌞',
     '睜開眼就想到你,早安 🥰☀️',
     '早安,願你今天順順利利 🌻💗',
-    '一早就想跟你說早安 ☀️🖤'
+    '一早就想跟你說早安 ☀️🖤',
+    '早安,今天的妳也要閃閃發光哦 ✨☀️',
+    '雖然隔著時差,還是想第一個跟妳說早安 🌏😊',
+    '早安,今天想妳的次數已經開始累積了 💗🌞',
+    '早安,願妳今天在異鄉也順順利利 🌸🖤',
+    '新的一天,新的想妳,早安 💭☀️',
+    '早安,記得多穿一點,照顧好自己 🧥🌞',
+    '早安啊,期待妳回來的日子越來越近了 🥹💗',
+    '早安,今天也要元氣滿滿地探索一下哦 🎒☀️',
+    '早安寶貝,不管距離多遠,我都想著妳 🌙➡️☀️',
+    '早安,想妳的心情比咖啡因還提神 ☕💗'
   ];
+
+  // Il ciclo dei messaggi parte da oggi (indice 0), poi avanza di uno ogni giorno
+  var messageAnchorDate = new Date(2026, 8, 16, 0, 0, 0);
 
   function updateDayNightMode(){
     var now = new Date();
@@ -1424,7 +1447,8 @@
 
     document.body.classList.toggle('night-mode', isNight);
 
-    var dayIndex = Math.floor(now.getTime() / 86400000) % 10;
+    var daysSinceAnchor = Math.floor((now - messageAnchorDate) / 86400000);
+    var dayIndex = ((daysSinceAnchor % 20) + 20) % 20;
     var banner = document.getElementById('daynight-banner');
     banner.textContent = isNight ? nightMessages[dayIndex] : morningMessages[dayIndex];
     banner.classList.add('show');
