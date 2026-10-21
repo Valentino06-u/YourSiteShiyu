@@ -41,6 +41,28 @@
     --butter: #E0C568;
     --mint: #9E86C7;
   }
+  /* ---------- 3 nuovi temi: cielo, limone, gatto nero ---------- */
+  body.theme-cielo{
+    --pink: #CFE8FF;
+    --pink-deep: #3D8BFD;
+    --lavender: #D9E4FF;
+    --butter: #FFF1B8;
+    --mint: #BDEBFF;
+  }
+  body.theme-limone{
+    --pink: #FFF0A8;
+    --pink-deep: #C98A00;
+    --lavender: #FFE9B8;
+    --butter: #FFE066;
+    --mint: #E6F5B8;
+  }
+  body.theme-gatto{
+    --pink: #D9D6DE;
+    --pink-deep: #4B4453;
+    --lavender: #CFCBD8;
+    --butter: #E6DFC9;
+    --mint: #BFC8CC;
+  }
   /* ---------- Tema segreto: si attiva da solo il 14/2 e il 19/8 ---------- */
   body.theme-valentine{
     --pink: #FF8FAE;
@@ -88,6 +110,36 @@
     100%{ transform: translateY(110vh) rotate(360deg); opacity: 0; }
   }
 
+  /* ---------- Messaggi di scuse che compaiono su tutto il sito ---------- */
+  .apology-container{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 600;
+    overflow: hidden;
+  }
+  .apology-msg{
+    position: absolute;
+    font-family: 'Baloo 2';
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--plum);
+    background: white;
+    border: 3px solid var(--plum);
+    border-radius: 999px;
+    padding: .5rem 1.1rem;
+    box-shadow: 0 6px 0 rgba(74,37,69,.2);
+    text-align: center;
+    animation: apology-pop 4.2s ease-in-out forwards;
+  }
+  @keyframes apology-pop{
+    0%{ opacity: 0; transform: translateY(14px) scale(.8); }
+    15%{ opacity: 1; transform: translateY(0) scale(1.05); }
+    25%{ transform: translateY(0) scale(1); }
+    80%{ opacity: 1; transform: translateY(-6px) scale(1); }
+    100%{ opacity: 0; transform: translateY(-22px) scale(.95); }
+  }
+
   /* ---------- Modalita' notturna automatica (21:00-6:00) ---------- */
   .night-only{ display:none; }
   body.night-mode .night-only{ display:inline-block; }
@@ -113,7 +165,7 @@
     display:none;
     text-align:center;
     font-family:'Baloo 2';
-    font-weight:700; 
+    font-weight:700;
     font-size: 1rem;
     color: var(--plum);
     background: white;
@@ -1229,6 +1281,7 @@
 <body>
 
 <div class="site-confetti-container" id="site-confetti-container"></div>
+<div class="apology-container" id="apology-container"></div>
 
 <div class="hero">
   <span class="sticker" style="top:12%; left:10%; animation-delay:0s;">✨</span>
@@ -1262,6 +1315,15 @@
     </button>
     <button class="theme-btn" id="theme-btn-notte" onclick="setTheme('notte')">
       <span class="theme-dot" style="background:#8B4FD1;"></span>夜紫🖤
+    </button>
+    <button class="theme-btn" id="theme-btn-cielo" onclick="setTheme('cielo')">
+      <span class="theme-dot" style="background:#3D8BFD;"></span>天空
+    </button>
+    <button class="theme-btn" id="theme-btn-limone" onclick="setTheme('limone')">
+      <span class="theme-dot" style="background:#FFD83A;"></span>檸檬
+    </button>
+    <button class="theme-btn" id="theme-btn-gatto" onclick="setTheme('gatto')">
+      <span class="theme-dot" style="background:#2B2630;"></span>黑貓🐈‍⬛
     </button>
   </div>
 </div>
@@ -1854,7 +1916,7 @@
   // =========================================================
   function setTheme(name){
     document.body.className = (name === 'originale') ? '' : ('theme-' + name);
-    ['originale','menta','pesca','notte'].forEach(function(t){
+    ['originale','menta','pesca','notte','cielo','limone','gatto'].forEach(function(t){
       document.getElementById('theme-btn-' + t).classList.toggle('active', t === name);
     });
     try{ localStorage.setItem('shiyuSiteTheme', name); }catch(e){}
@@ -2129,6 +2191,54 @@
 
   checkTwoMonthAnniversary();
   setInterval(checkTwoMonthAnniversary, 30000);
+
+  // =========================================================
+  // MESSAGGI DI SCUSE su tutto il sito
+  // Attivi dal 21 ottobre alle 02:00 fino al 22 ottobre alle 03:00.
+  // ---- Modifica le due date qui sotto se vuoi cambiare la finestra ----
+  // =========================================================
+  var apologyPhrases = [
+    '對不起',
+    '我真的很抱歉',
+    '我是個笨蛋',
+    '我是個大笨蛋,對不起',
+    '我天生就不太對勁,對不起',
+    '對不起,我是個笨蛋',
+    '我真的很對不起'
+  ];
+  var apologyInterval = null;
+
+  function checkApologyWindow(){
+    var now = new Date();
+    var start = new Date(2026, 9, 21, 2, 0, 0);  // 21 ottobre 2026, ore 02:00
+    var end = new Date(2026, 9, 22, 3, 0, 0);    // 22 ottobre 2026, ore 03:00
+    var isActive = (now >= start && now < end);
+
+    if(isActive && !apologyInterval){
+      launchApologyMessage();
+      apologyInterval = setInterval(launchApologyMessage, 2000);
+    } else if(!isActive && apologyInterval){
+      clearInterval(apologyInterval);
+      apologyInterval = null;
+    }
+  }
+
+  function launchApologyMessage(){
+    var container = document.getElementById('apology-container');
+    if(!container) return;
+    var msg = document.createElement('div');
+    msg.className = 'apology-msg';
+    msg.textContent = apologyPhrases[Math.floor(Math.random() * apologyPhrases.length)];
+    var x = 3 + Math.random() * 40;
+    msg.style.left = x + '%';
+    msg.style.top = (8 + Math.random() * 77) + '%';
+    msg.style.maxWidth = (96 - x) + 'vw';
+    container.appendChild(msg);
+    setTimeout(function(){ msg.remove(); }, 4300);
+  }
+
+  checkApologyWindow();
+  setInterval(checkApologyWindow, 30000);
 
   // =========================================================
   // OROLOGIO: Italia e Cina in tempo reale
@@ -2634,6 +2744,27 @@
       image: 'foto/Shiyu7.jpeg',
       title: '安靜的夜晚:P',
       text: '不幸的是我們錯過了日食😿（但至少我和你在一起所以我仍然很高興:3'
+    },
+    // ==== 4 NUOVE PAGINE: cambia image, title e text con i tuoi ====
+    {
+      image: 'foto/Shiyu8.jpeg',   // <-- METTI QUI la foto della pagina 8
+      title: '(在這裡寫第8頁的標題)',
+      text: '(在這裡寫下這一天的故事)'
+    },
+    {
+      image: 'foto/Shiyu9.jpeg',   // <-- METTI QUI la foto della pagina 9
+      title: '(在這裡寫第9頁的標題)',
+      text: '(在這裡寫下這一天的故事)'
+    },
+    {
+      image: 'foto/Shiyu10.jpeg',  // <-- METTI QUI la foto della pagina 10
+      title: '(在這裡寫第10頁的標題)',
+      text: '(在這裡寫下這一天的故事)'
+    },
+    {
+      image: 'foto/Shiyu11.jpeg',  // <-- METTI QUI la foto della pagina 11
+      title: '(在這裡寫第11頁的標題)',
+      text: '(在這裡寫下這一天的故事)'
     }
   ];
   var diaryIndex = 0;
