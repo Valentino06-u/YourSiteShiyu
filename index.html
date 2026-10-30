@@ -1269,6 +1269,142 @@
     100%{ transform: scale(.6) translateY(-30px) rotate(15deg); opacity: 0; }
   }
 
+  /* ---------- Messaggio temporaneo: quattro mesi insieme ---------- */
+  .four-month-box{
+    position: relative;
+    overflow: hidden;
+    padding: 2.4rem 1.6rem 2.8rem;
+    text-align:center;
+    background: linear-gradient(160deg, var(--butter) 0%, var(--pink) 50%, var(--lavender) 100%);
+  }
+  .four-big{
+    font-family:'Baloo 2';
+    font-weight:800;
+    font-size: 5.2rem;
+    line-height: 1;
+    color: var(--pink-deep);
+    text-shadow: 0 5px 0 rgba(74,37,69,.15);
+    animation: beat 1.4s ease-in-out infinite;
+  }
+  .four-big small{
+    display:block;
+    font-size: 1.1rem;
+    letter-spacing: .1em;
+    color: var(--plum);
+    text-shadow: none;
+    margin-top: .3rem;
+  }
+  .four-cats{
+    position: relative;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    gap: .8rem;
+    height: 5.4rem;
+    margin: 1rem 0 1.2rem;
+  }
+  .four-cat{
+    font-size: 3.4rem;
+    display:inline-block;
+    position: relative;
+    z-index: 2;
+  }
+  .four-cat.left{ animation: cat-nuzzle-left 2.4s ease-in-out infinite; }
+  .four-cat.right{ transform: scaleX(-1); animation: cat-nuzzle-right 2.4s ease-in-out infinite; }
+  @keyframes cat-nuzzle-left{
+    0%, 100%{ transform: translateX(-6px) rotate(-4deg); }
+    50%{ transform: translateX(10px) rotate(6deg); }
+  }
+  @keyframes cat-nuzzle-right{
+    0%, 100%{ transform: scaleX(-1) translateX(-6px) rotate(-4deg); }
+    50%{ transform: scaleX(-1) translateX(10px) rotate(6deg); }
+  }
+  .four-heart-mid{
+    font-size: 1.7rem;
+    align-self:center;
+    animation: beat 1.2s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+  }
+  .four-rise{
+    position:absolute;
+    bottom: 1.2rem;
+    font-size: 1.3rem;
+    pointer-events:none;
+    z-index: 1;
+    animation: four-rise-anim 3s ease-out forwards;
+  }
+  @keyframes four-rise-anim{
+    0%{ transform: translateY(0) scale(.4); opacity: 0; }
+    20%{ opacity: 1; }
+    100%{ transform: translateY(-120px) scale(1.15); opacity: 0; }
+  }
+  .four-month-box p{
+    font-family: 'Baloo 2';
+    font-weight: 600;
+    color: var(--plum);
+    line-height: 2;
+    font-size: 1.06rem;
+    white-space: pre-line;
+    text-align:center;
+    max-width: 32rem;
+    margin: 0 auto;
+  }
+
+  /* ---------- Gioco: Cattura i cuori ---------- */
+  .catch-stats{
+    display:flex;
+    justify-content:center;
+    gap: 1.2rem;
+    flex-wrap:wrap;
+    font-family:'Baloo 2';
+    font-weight:800;
+    color: var(--plum);
+    margin-bottom: .9rem;
+  }
+  .catch-area{
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    height: 380px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 20px;
+    border: 3px solid var(--plum);
+    background: linear-gradient(180deg, var(--lavender) 0%, var(--pink) 100%);
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .catch-item{
+    position:absolute;
+    top: 0;
+    font-size: 2.1rem;
+    line-height: 1;
+    padding: 6px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    animation: catch-fall linear forwards;
+  }
+  @keyframes catch-fall{
+    from{ transform: translateY(-50px); }
+    to{ transform: translateY(var(--fall, 420px)); }
+  }
+  .catch-pop{
+    position:absolute;
+    font-family:'Baloo 2';
+    font-weight:800;
+    font-size: 1.2rem;
+    pointer-events:none;
+    z-index: 3;
+    animation: catch-pop-anim .7s ease-out forwards;
+  }
+  @keyframes catch-pop-anim{
+    0%{ transform: translateY(0) scale(.8); opacity: 1; }
+    100%{ transform: translateY(-38px) scale(1.25); opacity: 0; }
+  }
+
   footer{
     text-align:center;
     padding: 3rem 1.5rem 4rem;
@@ -1423,6 +1559,42 @@
 我想和妳擁有一個未來。
 
 我愛妳。🖤🐈‍⬛💋</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     MESSAGGIO TEMPORANEO: quattro mesi insieme
+     Visibile dal 31/10 alle 00:01 fino all'1/11 alle 00:01 (un giorno intero)
+============================================================ -->
+<section id="four-month-letter" class="temp-message-section">
+  <span class="sticker" style="top:5%; left:8%; animation-delay:.3s;">🎉</span>
+  <span class="sticker" style="top:9%; right:9%; animation-delay:1.5s;">🥂</span>
+  <span class="sticker" style="bottom:7%; left:10%; animation-delay:2.2s;">🖤</span>
+  <span class="sticker" style="bottom:11%; right:9%; animation-delay:1s;">🎂</span>
+
+  <div class="section-kicker">四個月快樂</div>
+  <h2 class="section-title">給我們兩個 🖤</h2>
+
+  <div class="card four-month-box">
+    <div class="four-big">4<small>個月 🖤</small></div>
+
+    <div class="four-cats" id="four-cats">
+      <span class="four-cat left">🐈‍⬛</span>
+      <span class="four-heart-mid">💗</span>
+      <span class="four-cat right">🐈‍⬛</span>
+    </div>
+
+    <p>今天是我們的四個月紀念日 🎉
+
+祝詩雨四個月快樂 🖤
+謝謝妳每一天的笑容,
+也謝謝妳讓我變成更好的人。
+
+也祝我自己四個月快樂 🐈‍⬛
+繼續努力,要好好珍惜她、好好愛她。
+
+祝我們兩個四個月快樂 🥂
+兩隻小貓咪,還要一起走很多很多個月 💗</p>
   </div>
 </section>
 
@@ -1684,6 +1856,7 @@
     <button class="game-tab" onclick="showGame('memory')" id="tab-memory">🃏 記憶</button>
     <button class="game-tab" onclick="showGame('nim')" id="tab-nim">🔥 比賽</button>
     <button class="game-tab" onclick="showGame('draw')" id="tab-draw">🎨 畫畫</button>
+    <button class="game-tab" onclick="showGame('catch')" id="tab-catch">💗 接愛心</button>
   </div>
 
   <!-- Tris -->
@@ -1742,6 +1915,18 @@
       <canvas id="draw-canvas" width="360" height="360"></canvas>
     </div>
     <button class="game-reset" onclick="finishDrawing()" style="margin-top:1.2rem;">🎉 完成!</button>
+  </div>
+
+  <!-- Cattura i cuori -->
+  <div class="game-panel card game-box" id="panel-catch">
+    <div class="catch-stats">
+      <span id="catch-score">分數: 0</span>
+      <span id="catch-time">時間: 30</span>
+      <span id="catch-best">最高: 0</span>
+    </div>
+    <div class="catch-area" id="catch-area"></div>
+    <div class="game-message" id="catch-message"></div>
+    <button class="game-reset" onclick="startCatchGame()">▶ 開始</button>
   </div>
 </section>
 
@@ -2241,6 +2426,75 @@
   setInterval(checkApologyWindow, 30000);
 
   // =========================================================
+  // QUATTRO MESI INSIEME
+  // Si attiva il 31 ottobre alle 00:01 e finisce 24 ore dopo
+  // (1 novembre alle 00:01).
+  // ---- Modifica le due date qui sotto se vuoi cambiare la finestra ----
+  // =========================================================
+  var fourMonthRainLaunched = false;
+  var fourMonthRiseInterval = null;
+
+  function checkFourMonthAnniversary(){
+    var now = new Date();
+    var start = new Date(2026, 9, 31, 0, 1, 0);   // 31 ottobre 2026, ore 00:01
+    var end = new Date(2026, 10, 1, 0, 1, 0);     // 1 novembre 2026, ore 00:01
+    var isActive = (now >= start && now < end);
+
+    document.getElementById('four-month-letter').classList.toggle('show', isActive);
+
+    if(isActive){
+      if(!fourMonthRainLaunched){
+        fourMonthRainLaunched = true;
+        launchFourMonthRain();
+      }
+      if(!fourMonthRiseInterval){
+        fourMonthRiseInterval = setInterval(launchFourMonthRise, 700);
+      }
+    } else {
+      if(fourMonthRiseInterval){
+        clearInterval(fourMonthRiseInterval);
+        fourMonthRiseInterval = null;
+      }
+      if(fourMonthRainLaunched){
+        // finita la giornata: tolgo la pioggia di cuori
+        fourMonthRainLaunched = false;
+        document.querySelectorAll('.four-month-piece').forEach(function(el){ el.remove(); });
+      }
+    }
+  }
+
+  // Pioggia di cuori e festa su tutto il sito
+  function launchFourMonthRain(){
+    var container = document.getElementById('site-confetti-container');
+    var pieces = ['💗','🖤','💕','🎉','🥂','🎂','✨','💋','🐈\u200d⬛','❤️'];
+    for(var i = 0; i < 60; i++){
+      var span = document.createElement('span');
+      span.className = 'site-confetti-piece four-month-piece';
+      span.textContent = pieces[Math.floor(Math.random() * pieces.length)];
+      span.style.left = (Math.random() * 100) + '%';
+      span.style.animationDuration = (4 + Math.random() * 4) + 's';
+      span.style.animationDelay = (Math.random() * 7) + 's';
+      container.appendChild(span);
+    }
+  }
+
+  // Cuoricini che salgono tra i due gattini
+  function launchFourMonthRise(){
+    var cats = document.getElementById('four-cats');
+    if(!cats) return;
+    var items = ['💗','🖤','💕','✨'];
+    var span = document.createElement('span');
+    span.className = 'four-rise';
+    span.textContent = items[Math.floor(Math.random() * items.length)];
+    span.style.left = (40 + Math.random() * 20) + '%';
+    cats.appendChild(span);
+    setTimeout(function(){ span.remove(); }, 3100);
+  }
+
+  checkFourMonthAnniversary();
+  setInterval(checkFourMonthAnniversary, 30000);
+
+  // =========================================================
   // OROLOGIO: Italia e Cina in tempo reale
   // =========================================================
   function updateClocks(){
@@ -2340,7 +2594,9 @@
   setInterval(updateSpecialCountdown, 1000);
 
   function showGame(name){
-    ['ttt','memory','nim','draw'].forEach(function(g){
+    // se esci dal gioco dei cuori mentre sta girando, lo fermo e lo azzero
+    if(name !== 'catch' && catchRunning){ resetCatchGame(); }
+    ['ttt','memory','nim','draw','catch'].forEach(function(g){
       document.getElementById('panel-'+g).classList.toggle('active', g === name);
       document.getElementById('tab-'+g).classList.toggle('active', g === name);
     });
@@ -2698,6 +2954,143 @@
     renderNim();
   }
 
+  // =========================================================
+  // CATTURA I CUORI: tocca i cuori che cadono, evita quelli spezzati
+  // 30 secondi, il record migliore resta salvato nel browser
+  // =========================================================
+  var catchScore = 0;
+  var catchTimeLeft = 30;
+  var catchRunning = false;
+  var catchSpawnTimer = null;
+  var catchClockTimer = null;
+  var catchBest = 0;
+  try{ catchBest = parseInt(localStorage.getItem('shiyuCatchBest') || '0', 10) || 0; }catch(e){}
+
+  // peso = quanto spesso compare; punti = quanto vale
+  var catchGoodItems = [
+    { emoji: '💗', points: 1, weight: 6 },
+    { emoji: '🖤', points: 2, weight: 3 },
+    { emoji: '🐈\u200d⬛', points: 5, weight: 1 }
+  ];
+  var catchBadItem = { emoji: '💔', points: -3 };
+
+  function pickCatchItem(){
+    if(Math.random() < 0.2){ return catchBadItem; }
+    var total = 0;
+    catchGoodItems.forEach(function(it){ total += it.weight; });
+    var r = Math.random() * total;
+    for(var i = 0; i < catchGoodItems.length; i++){
+      r -= catchGoodItems[i].weight;
+      if(r <= 0){ return catchGoodItems[i]; }
+    }
+    return catchGoodItems[0];
+  }
+
+  function catchRenderStats(){
+    document.getElementById('catch-score').textContent = '分數: ' + catchScore;
+    document.getElementById('catch-time').textContent = '時間: ' + catchTimeLeft;
+    document.getElementById('catch-best').textContent = '最高: ' + catchBest;
+  }
+
+  function stopCatchGame(){
+    catchRunning = false;
+    if(catchSpawnTimer){ clearInterval(catchSpawnTimer); catchSpawnTimer = null; }
+    if(catchClockTimer){ clearInterval(catchClockTimer); catchClockTimer = null; }
+  }
+
+  function resetCatchGame(){
+    stopCatchGame();
+    catchScore = 0;
+    catchTimeLeft = 30;
+    document.getElementById('catch-area').innerHTML = '';
+    document.getElementById('catch-message').textContent = '按「開始」,接住 💗🖤🐈\u200d⬛,避開 💔';
+    catchRenderStats();
+  }
+
+  function startCatchGame(){
+    stopCatchGame();
+    catchScore = 0;
+    catchTimeLeft = 30;
+    catchRunning = true;
+    document.getElementById('catch-area').innerHTML = '';
+    document.getElementById('catch-message').textContent = '';
+    catchRenderStats();
+
+    spawnCatchItem();
+    catchSpawnTimer = setInterval(spawnCatchItem, 600);
+    catchClockTimer = setInterval(function(){
+      catchTimeLeft--;
+      catchRenderStats();
+      if(catchTimeLeft <= 0){ endCatchGame(); }
+    }, 1000);
+  }
+
+  function endCatchGame(){
+    stopCatchGame();
+    document.getElementById('catch-area').innerHTML = '';
+
+    var newBest = catchScore > catchBest;
+    if(newBest){
+      catchBest = catchScore;
+      try{ localStorage.setItem('shiyuCatchBest', String(catchBest)); }catch(e){}
+    }
+    catchRenderStats();
+
+    var tier;
+    if(catchScore >= 40){ tier = '太厲害了!妳是接愛心大師 🖤🐈\u200d⬛'; }
+    else if(catchScore >= 20){ tier = '很棒!愛心都被妳接走了 💗'; }
+    else { tier = '再試一次吧,愛心還在等妳 💕'; }
+
+    document.getElementById('catch-message').textContent =
+      '時間到!分數:' + catchScore + ' ' + tier + (newBest && catchScore > 0 ? ' 🏆新紀錄!' : '');
+  }
+
+  function spawnCatchItem(){
+    if(!catchRunning) return;
+    var area = document.getElementById('catch-area');
+    var def = pickCatchItem();
+    var el = document.createElement('span');
+    el.className = 'catch-item';
+    el.textContent = def.emoji;
+
+    var width = area.clientWidth || 340;
+    var height = area.clientHeight || 380;
+    el.style.left = (Math.random() * Math.max(10, width - 52)) + 'px';
+    el.style.setProperty('--fall', (height + 20) + 'px');
+
+    // nella seconda meta' del gioco cadono un po' piu' veloci
+    var duration = (2.6 + Math.random() * 1.4) * (catchTimeLeft < 15 ? 0.8 : 1);
+    el.style.animationDuration = duration + 's';
+
+    var caught = false;
+    el.addEventListener('pointerdown', function(ev){
+      ev.preventDefault();
+      if(caught || !catchRunning) return;
+      caught = true;
+      catchScore = Math.max(0, catchScore + def.points);
+      showCatchPop(area, el, def.points);
+      el.remove();
+      catchRenderStats();
+    });
+    el.addEventListener('animationend', function(){ el.remove(); });
+    area.appendChild(el);
+  }
+
+  function showCatchPop(area, el, points){
+    var elRect = el.getBoundingClientRect();
+    var areaRect = area.getBoundingClientRect();
+    var pop = document.createElement('span');
+    pop.className = 'catch-pop';
+    pop.textContent = (points > 0 ? '+' : '') + points;
+    pop.style.color = points > 0 ? 'var(--pink-deep)' : '#D33A3A';
+    pop.style.left = (elRect.left - areaRect.left) + 'px';
+    pop.style.top = (elRect.top - areaRect.top) + 'px';
+    area.appendChild(pop);
+    setTimeout(function(){ pop.remove(); }, 700);
+  }
+
+  resetCatchGame();
+
   // Inizializza tutti i giochi al caricamento della pagina
   resetTTT();
   resetMemory();
@@ -2745,179 +3138,178 @@
       title: '安靜的夜晚:P',
       text: '不幸的是我們錯過了日食😿（但至少我和你在一起所以我仍然很高興:3'
     },
-    
     {
-      image: 'foto/Shiyu8.jpeg',   
+      image: 'foto/Shiyu8.jpeg',
       title: '还在水里 💧',
       text: '只是水疗期间的另一张美丽照片xd'
     },
     {
-      image: 'foto/Shiyu9.jpeg',   
+      image: 'foto/Shiyu9.jpeg',
       title: '你曾将其称为“水核”（aquacore）.',
       text: '你的腿很美，即便是在水下。'
     },
     {
-      image: 'foto/Shiyu10.jpeg',  
+      image: 'foto/Shiyu10.jpeg',
       title: '瓦伦蒂诺顺从 xd M😻😻😻',
       text: '我在这儿简直可爱极了，哈哈'
     },
     {
-      image: 'foto/Shiyu11.jpeg',  
-      title: '我的两只小猫咪💋💋🐈‍⬛🐈‍⬛',
+      image: 'foto/Shiyu11.jpeg',
+      title: '我的两只小猫咪💋💋🐈\u200d⬛🐈\u200d⬛',
       text: '你知道吗，我一直把那张画带在身边，放在我的黑色双肩包里——为了求个好运。我从来没把那张纸扔掉过。'
-    }
-    ,{
-      image: 'foto/Shiyu12.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu12.jpeg',
       title: '我爱你亲爱的',
-      text:  '说真的，亲爱的，别丢了那抹笑容——它真的美得要命。'
-    }
-    ,{
-      image: 'foto/Shiyu13.jpeg',  
+      text: '说真的，亲爱的，别丢了那抹笑容——它真的美得要命。'
+    },
+    {
+      image: 'foto/Shiyu13.jpeg',
       title: '哈哈，原来你当时很困啊！',
       text: '我们复习完之后，你困得不行，于是我决定拍了几张照片——哈哈！你靠在我身上熟睡的样子真美；我想，这应该是我第一次见到你真正地在我身边睡着'
-    }
-    ,{
-      image: 'foto/Shiyu14.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu14.jpeg',
       title: '下次我们就能看到日食了。',
       text: '我们没能看到日食，我依然觉得很遗憾——这让我感到有些难过——不过，没看到也没关系。'
-    }
-    ,{
-      image: 'foto/Shiyu15.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu15.jpeg',
       title: '简单版第 2 部分',
       text: '总之，这扇窗挺可爱的；很高兴我们吃了塔可之类的东西——哈哈，那份三文鱼味道真不错。'
-    }
-    ,{
-      image: 'foto/Shiyu16.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu16.jpeg',
       title: '你的纪念日妆容和你本人一样，既美丽又充满创意 🫂💄🖤🖤🖤',
       text: '你怎么会看不见自己有多美呢？无论你是否化妆，在我眼中，你都无比可爱、动人，甚至性感——远不止这些。说真的，当你自称“丑”的时候，我简直无法相信；在我这二十年的人生里，你绝对是我见过最美的人。还有，那天晚上没能和你发生亲密关系，我很抱歉。'
-    }
-    ,{
-      image: 'foto/Shiyu17.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu17.jpeg',
       title: '我的恶魔天使小猫咪 S 😝😝😝😈😈',
       text: '你在这儿的表情好可爱，这个滤镜也特别萌——非常适合你！:D'
-    }
-    ,{
-      image: 'foto/Shiyu18.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu18.jpeg',
       title: '这是给你的枕头 :P',
       text: '很高兴你喜欢那个靠垫。'
-    }
-    ,{
-      image: 'foto/Shiyu19.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu19.jpeg',
       title: '这是一款非常不错的游戏——它还会再出续作吗？',
       text: '和你一起玩“毒吻”挑战真的太开心了；我想再玩一次，而且要玩得特别特别久 🥺🥺🥺🤪🤪🤪🤪'
-    }
-    ,{
-      image: 'foto/Shiyu20.jpeg',  
-      title: '挑战环节里我最喜欢的一个吻😵‍💫💋',
+    },
+    {
+      image: 'foto/Shiyu20.jpeg',
+      title: '挑战环节里我最喜欢的一个吻😵\u200d💫💋',
       text: '下次，作为这项挑战的一部分，我会给你一个更长、更热烈的吻——小猫说话算话哦！😸🖤😘'
-    }
-    ,{
-      image: 'foto/Shiyu21.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu21.jpeg',
       title: '我和“朋友鱼”',
-      text: '🐟🐈‍⬛🐟'
-    }
-    ,{
-      image: 'foto/Shiyu22.jpeg',  
+      text: '🐟🐈\u200d⬛🐟'
+    },
+    {
+      image: 'foto/Shiyu22.jpeg',
       title: '你的礼服简直完美——既美丽又动人。珍珠的点缀恰到好处，穿在你身上再合适不过了。',
       text: '你知道吗，在这张照片里，你的脸看起来很美，尽管光线或许有些不太“友好”。我看到了非常漂亮的眼睛——它们绝不难看；而且，与众不同也并非坏事。你很清楚，这个世界有时会设定一些根本无法企及的审美标准，但你一点也不丑——你很美。那些伤害过你的人，才是真正“丑陋”的——包括我在内。每当我注视你或想起你时，我一点也看不出哪里丑陋；你由内而外，都很美。'
-    }
-    ,{
-      image: 'foto/Shiyu23.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu23.jpeg',
       title: '我选这张照片是因为它很有趣 xd😃',
       text: '在这里可以看到你有多高 :P 当时我们在恩波利（Empoli）的公园里 :O🏞️'
-    }
-    ,{
-      image: 'foto/Shiyu24.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu24.jpeg',
       title: '回到家',
       text: '你回到家，我真的特别高兴——毕竟，距离你上次回家已经过去整整十个月了！我知道你很想念家里的猫，也想再看看自己的故乡。说实话，那段时间我状态糟透了——因为太想你，每天都哭得稀里哗啦的。我甚至想过通过这个平台给你发一段我唱歌的音频，但试了好几次，还是没法把那首歌唱好！还有，谢谢你给我看这张照片——拍得真美。'
-    }
-    ,{
-      image: 'foto/Shiyu25.jpeg', 
+    },
+    {
+      image: 'foto/Shiyu25.jpeg',
       title: '你和你的小猫咪😻',
       text: '你说得对；其实她长得挺像你的——你们俩都很可爱，真希望哪天能摸摸她。'
-    }
-    ,{
-      image: 'foto/Shiyu26.jpeg',  
-      title: '哈哈，你和星巴克 🐼🐈‍⬛',
+    },
+    {
+      image: 'foto/Shiyu26.jpeg',
+      title: '哈哈，你和星巴克 🐼🐈\u200d⬛',
       text: '亲爱的，你看到自己在这里有多美了吗？别讨厌自己；你很好，也很纯真——你并不是个坏人。你不该受到任何人的亏待，包括你自己。'
-    }
-    ,{
+    },
+    {
       image: 'foto/Shiyu27.jpeg',
       title: '这是你到米兰以来发给我的第一张你自己的照片！🥳🥳🥳🎉🎉🎉🎉',
       text: '看看你的那顶帽子戴起来多好看:3 <3 ;D'
-    }
-    ,{
-      image: 'foto/Shiyu28.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu28.jpeg',
       title: '我喜欢你的眼睛，即使是在这张照片里。',
       text: '而且我在这张照片里看起来好丑，哈哈。还有，我妈身材特别有料，可惜我只有A罩杯 :( 不过很快就会变大的，哈哈。'
-    }
-    ,{
-      image: 'foto/Shiyu29.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu29.jpeg',
       title: '又一张漂亮的照片',
       text: '你发现自己的笑容有多好看吗？无论你外表如何，我对你的爱都不会改变，因为我爱的是你这个人——无论你呈现出怎样的样貌，这都不重要。我知道你或许不相信这些话，但它们都是真的；我之所以这么肯定，是因为你是我生命中不可或缺的一部分。在写下这段话——以及针对其他照片所写的内容——时，我不止一次落泪。我这么说并非为了博取你的同情，而是想告诉你：无论你外表如何，我都会永远爱你。不过，千万别变成卢西奥（Lucio）哦，哈哈！'
-    }
-    ,{
-      image: 'foto/Shiyu30.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu30.jpeg',
       title: '这是一个非常好的过滤器；3',
       text: '你就像只可爱的小猫——瞧这好看的唇色，还有你画的眼线，真是太迷人了！而且，你的睡衣也很可爱。'
-    }
-    ,{
-      image: 'foto/Shiyu31.jpeg',  
-      title: '我抽烟 xd 和我的 Carrrrrra😁😁😁🐈‍⬛🖤',
+    },
+    {
+      image: 'foto/Shiyu31.jpeg',
+      title: '我抽烟 xd 和我的 Carrrrrra😁😁😁🐈\u200d⬛🖤',
       text: '或许还有画质更好的照片，但我依然很喜欢这张，因为你在里面——照片很有趣，而且他居然还在打哈欠！🥱🥱'
-    }
-    ,{
-      image: 'foto/Shiyu32.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu32.jpeg',
       title: '皮恩扎，街灯下的夜晚🌃🌃🌃',
       text: '我喜欢我们在这里做的有趣的鬼脸 :p xd'
-    }
-    ,{
-      image: 'foto/Shiyu33.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu33.jpeg',
       title: '我只是在这里做一个好孩子xd',
       text: '确实如此，我那件红色卫衣穿在你身上，反而比穿在我身上更好看——它简直太适合你了。'
-    }
-    ,{
-      image: 'foto/Shiyu34.jpeg',  
-      title: '🌲🌲🌲🐈‍⬛🌲🌲🌲',
+    },
+    {
+      image: 'foto/Shiyu34.jpeg',
+      title: '🌲🌲🌲🐈\u200d⬛🌲🌲🌲',
       text: '你真的很喜欢那颗心，对吧？😁😛😛😛😛😛😛'
-    }
-    ,{
-      image: 'foto/Shiyu35.jpeg',  
-      title: '在皮恩扎的最后一天💘💗❤️‍🔥',
+    },
+    {
+      image: 'foto/Shiyu35.jpeg',
+      title: '在皮恩扎的最后一天💘💗\u2764\uFE0F\u200d\uD83D\uDD25',
       text: '你知道吗，日落固然美丽——甚至可以象征新开端的曙光——但在我看来，它所蕴含的意义远不及与你在一起的时光；它根本无法与之相提并论。对我而言，哪怕只是见你一面，也远比在希腊圣托里尼目睹世界上最美的日落更有意义。'
-    }
-    ,{
-      image: 'foto/Shiyu36.jpeg', 
+    },
+    {
+      image: 'foto/Shiyu36.jpeg',
       title: '你，凝望着地平线',
       text: '如果你看到了这条消息，请回复我——你享受阳光了吗？'
-    }
-    ,{
-      image: 'foto/Shiyu37.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu37.jpeg',
       title: '一支由“诗雨”组成的大军😻😻😻😻😻😻😻😻😻😻😻😻',
-      text: '妈，我来啦！啊——哈哈哈，开玩笑的，抱歉！😅😅😅😜♾️♾️♾️♾️♾️♾️♾️'
-    }
-    ,{
-      image: 'foto/Shiyu38.jpeg',  
+      text: '妈，我来啦！啊——哈哈哈，开玩笑的，抱歉！😅😅😅😜\u267E\uFE0F\u267E\uFE0F\u267E\uFE0F\u267E\uFE0F\u267E\uFE0F\u267E\uFE0F\u267E\uFE0F'
+    },
+    {
+      image: 'foto/Shiyu38.jpeg',
       title: '为你回到米兰',
       text: '还记得吗？我们就是从这儿出发，去坐地铁前往科莫的。还有，我不确定你是不是真的长高了……嗯，也许吧？🤔🤔'
-    }
-    ,{
-      image: 'foto/Shiyu39.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu39.jpeg',
       title: '哦。我把这个给忘了……',
       text: '呃……是啊……我当时情绪有点激动……嗯……😳'
-    }
-    ,{
-      image: 'foto/Shiyu40.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu40.jpeg',
       title: '很可爱，你不觉得吗？;D',
       text: '🤗🤗🤗'
-    }
-    ,{
-      image: 'foto/Shiyu41.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu41.jpeg',
       title: '照片里的你看起来很累，但至少你当时正抱着我；我喜欢待在你的怀里，也喜欢把你拥入我的怀中。',
       text: '这张照片算是“巧克力之吻”前拍的吧，哈哈。当时那一刻挺可爱的，不过我相信以后我们还会拥有更美好的瞬间。'
-    }
-    ,{
-      image: 'foto/Shiyu42.jpeg',  
+    },
+    {
+      image: 'foto/Shiyu42.jpeg',
       title: '谢谢',
       text: '我希望你每一天都能身心安好。所以，确认你没有受伤、没有在哭泣，对我而言至关重要——我是真心希望你好好的。我写这些并非为了“奉承”你——用我们意大利人的话说，就是“迎合你的虚荣心”——我只是想传达一些心里话。我知道你在冒很大的险，尤其是你对我愈发信任，还总是向我伸出援手。这并非一封感谢信，只是我想留在这里、留给你的一段话。我深知自己并未总是兑现承诺，但我确实非常在乎你——尽管我往往不善于表达这份关怀。我不擅长流露情感，而你则不同；在某种程度上，你与我截然相反。在某些方面，你比我更有天赋，包括处理人际关系——即便我拥有更多的时间去学习。你是如此真诚。我过去从不相信“性格迥异的人会相互吸引”，但或许确实如此——我也不确定。今晚我彻夜未眠，直到早上六点才躺下。这段时间里，我忙着处理各种琐事——在Indeed这类平台上查看兼职信息，浏览网站，或者只是翻看你的Instagram，以及相册里我们俩的合影。我反复阅读着你的那些消息——尤其是你快要睡着时发来的，伴随着轻柔呢喃的那几条。今晚，我甚至连被子都没盖。双眼有些酸涩——我估计最多也就睡了两个小时——但我却一点也不觉得累。今晚我心绪难平，索性只穿着内衣入睡，连被子也没盖——这算是我对自己的一种惩罚，因为我曾多次让你失望。请务必明白，我绝无意让你落泪、感到恐惧，或是产生任何负面的念头。这个世界上……已经有太多以折磨他人为乐的人了，我绝不想成为其中之一，更不会这样对待你。我绝无利用你的念头——无论是现在还是将来，我都没有这样的打算。我想帮你构建未来，而且我一定会促成这一点；这既出于我的意愿，也是我的责任。但请务必多加小心——无论发生什么，都要照顾好你的人生、你的未来，以及你的当下。你需要安好，这是我最大的心愿。信不信由你，我是真心爱你的；我只希望你能一切安好——拜托了。'
     }
