@@ -6,7 +6,7 @@
 <title>詩雨💕</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
 <style>
   :root{
     --pink: #FFD6E8;
@@ -1405,6 +1405,96 @@
     100%{ transform: translateY(-38px) scale(1.25); opacity: 0; }
   }
 
+  /* ---------- Messaggio temporaneo: 100 giorni insieme ---------- */
+  .hundred-letter{
+    position: relative;
+    overflow: hidden;
+    padding: 2.8rem 1.8rem 3.2rem;
+    background: linear-gradient(160deg, #FFF8E7 0%, var(--pink) 45%, var(--lavender) 100%);
+    border: 4px double var(--plum);
+  }
+  .hundred-title{
+    font-family: 'ZCOOL KuaiLe', 'Baloo 2', cursive;
+    font-weight: 400;
+    font-size: clamp(2.1rem, 7vw, 3.4rem);
+    line-height: 1.25;
+    text-align: center;
+    margin: 0 0 .4rem;
+    background: linear-gradient(90deg, #FF5DA2, #FF9F45, #FFC93C, #4FCB78, #4D96FF, #9B5DE5, #FF5DA2);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter: drop-shadow(0 3px 0 rgba(74,37,69,.18));
+    animation: hundred-shimmer 5s linear infinite;
+  }
+  @keyframes hundred-shimmer{
+    from{ background-position: 0% center; }
+    to{ background-position: 200% center; }
+  }
+  .hundred-sub{
+    font-family: 'ZCOOL KuaiLe', 'Baloo 2', cursive;
+    text-align: center;
+    font-size: 1.15rem;
+    color: var(--plum);
+    margin-bottom: 1.2rem;
+  }
+  .hundred-flourish{
+    text-align:center;
+    color: var(--pink-deep);
+    letter-spacing: .9rem;
+    font-size: 1.1rem;
+    margin-bottom: .6rem;
+  }
+  .hundred-photo{
+    margin: 1.2rem auto 2rem;
+    max-width: 340px;
+    padding: 10px 10px 12px;
+    background: white;
+    border: 3px solid var(--plum);
+    border-radius: 14px;
+    box-shadow: 0 10px 0 rgba(255,159,203,.35);
+    cursor: pointer;
+  }
+  .hundred-photo img{
+    display:block;
+    width: 100%;
+    border-radius: 8px;
+  }
+  .hundred-photo figcaption{
+    font-family:'Baloo 2';
+    font-weight: 700;
+    text-align:center;
+    color: var(--plum);
+    margin-top: .6rem;
+    font-size: .95rem;
+  }
+  .hundred-text{
+    font-family: 'Baloo 2';
+    font-weight: 600;
+    color: var(--plum);
+    line-height: 2.05;
+    font-size: 1.05rem;
+    white-space: pre-line;
+    text-align: left;
+    max-width: 34rem;
+    margin: 0 auto;
+  }
+  /* Il contatore dei giorni insieme cambia colore per tutto il giorno dei 100 giorni */
+  #countdown-grid.countdown-100 .count-cell{
+    background: linear-gradient(135deg, #FFE066 0%, #FF9FCB 55%, #C9A7FF 100%);
+    border-color: #7A2E8E;
+    box-shadow: 0 0 16px rgba(201,167,255,.8);
+    animation: hundred-glow 2s ease-in-out infinite;
+  }
+  #countdown-grid.countdown-100 .count-cell .num{ color: #B3126B; }
+  #countdown-grid.countdown-100 .count-cell .label{ color: #5B2A6E; }
+  @keyframes hundred-glow{
+    0%, 100%{ box-shadow: 0 0 10px rgba(201,167,255,.6); }
+    50%{ box-shadow: 0 0 24px rgba(255,159,203,.95); }
+  }
+
   footer{
     text-align:center;
     padding: 3rem 1.5rem 4rem;
@@ -1595,6 +1685,178 @@
 
 祝我們兩個四個月快樂 🥂
 兩隻小貓咪,還要一起走很多很多個月 💗</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     MESSAGGIO TEMPORANEO: 100 giorni insieme
+     Compare quando il contatore dei giorni arriva a 100 e dura tutto quel giorno
+     FOTO: metti la tua foto in  foto/anniversario.jpeg  (se il file non c'e', la foto resta nascosta)
+============================================================ -->
+<section id="hundred-days" class="temp-message-section">
+  <span class="sticker" style="top:4%; left:7%; animation-delay:.2s;">💯</span>
+  <span class="sticker" style="top:8%; right:8%; animation-delay:1.4s;">🎉</span>
+  <span class="sticker" style="top:38%; left:3%; animation-delay:2.1s;">🥳</span>
+  <span class="sticker" style="top:42%; right:3%; animation-delay:.8s;">🖤</span>
+  <span class="sticker" style="bottom:9%; left:8%; animation-delay:1.9s;">🐈‍⬛</span>
+  <span class="sticker" style="bottom:6%; right:9%; animation-delay:.5s;">💋</span>
+
+  <div class="section-kicker">一百天</div>
+
+  <div class="card hundred-letter">
+    <div class="hundred-flourish">✦ ✦ ✦</div>
+    <h2 class="hundred-title">100天纪念日快乐 🎉</h2>
+    <div class="hundred-sub">我们撑过来了 🖤</div>
+
+    <figure class="hundred-photo" onclick="openLightbox(this)">
+      <img src="foto/anniversario.jpeg" alt="我们的纪念日" onerror="this.parentElement.style.display='none'">
+      <figcaption>我们的纪念日 🖤</figcaption>
+    </figure>
+
+    <p class="hundred-text">亲爱的诗雨，
+
+今天，我们在一起整整一百天了。💯
+一百天。写下这三个字的时候，我真的有点不敢相信，我们已经一起走了这么远。🖤
+
+我想先告诉你一件事。
+在认识你之前，我从来没有和任何人一起庆祝过一百天。
+而我知道，你也没有。
+所以今天对我们两个人来说，都是第一次——
+第一次一起走到一百天，第一次一起为这个数字开心，
+第一次真正地说出：“我们撑过来了。”🥹
+
+虽然我们要晚一点才能一起庆祝，
+但是没关系，晚一点也没关系。
+因为这个日子从来就不是为了蛋糕，也不是为了礼物，
+它只是想证明一件事：
+不管是好的时候，还是不好的时候，
+我们都已经一起走过了一百多个日夜。
+
+还记得吗？
+7月18日，我们认识了。
+那时候的我，怎么也想不到，
+一个陌生的女孩，会慢慢变成我每天醒来第一个想到、
+睡前最后一个想到的人。
+然后到了8月1日，我们正式在一起了。
+我还跟你打过赌，说我一定会赢——我们会在一起超过一个星期。
+你看，一个星期过去了，一个月过去了，
+两个月、三个月也过去了，现在已经是一百天。
+这个赌，我赢得好开心，因为我赢了，你也赢了。🎉
+
+我还记得我们第一次见面，我紧张得要命，
+还担心自己看起来太冷，怕你会害怕我，哈哈。
+后来我们一起拍了第一张合照，
+有了第一次拥抱，第一次约会，
+还有那个我到现在想起来都会偷偷笑的第一个吻——
+我因为太害羞，在车上不小心亲了好几次汽车座椅。😂💋
+那张梗图，我大概会笑一辈子。
+
+我们一起在水疗中心泡了一整天，
+我把你从水里“救”起来好多好多次；
+我们一起错过了日食，却一点也不觉得可惜，
+因为身边有你，就已经够了。
+我们去了皮恩扎，一起看了夕阳，
+在街灯下做了很多很蠢的鬼脸；
+我们在恩波利的公园里散步，
+还一起去过科莫。
+这些小小的瞬间，我全部都记得，
+而且我会一直记得。🌅
+
+不过，我想诚实地告诉你：
+这一百天，并不是每一天都很完美。
+我们也有过难过的日子，有过误会，
+也有过我让你伤心的时刻。
+有时候我真的是个笨蛋，说错话，做错事，
+让你难过，让你失望。
+对于这些，我永远都觉得抱歉。
+但是你知道吗，最让我感动的是：
+即使在那些不好的日子里，
+我们也没有放弃彼此。
+我们难过过，沉默过，
+可是之后，我们还是想要回到对方身边。
+这就是为什么我说，
+我们是在“好的时候，也在不好的时候”，
+一起撑过了这一百天。🖤
+
+距离，也是这一百天的一部分。
+有时候你在米兰，我在这里，我们隔得很远；
+有时候你在读书，有时候我在读书；
+你回到家乡，去见你十个月没见的家人和小猫，
+我真心为你开心，也真心地想你。
+可是你知道吗？
+距离从来没有让我少爱你一点点，
+它只是让我更清楚地知道，我有多需要你。
+
+你还记得那张画吗？
+我一直把它带在身边，放在我的黑色背包里，
+为了求个好运，我从来没有把那张纸扔掉过。
+每次看到它，我就会想起你，
+它就像一个小小的好运符，
+也像是你一直在我身边的证明。🖤
+
+还有一些我喜欢你的小事，我想一件一件告诉你：
+🖤 我喜欢你的笑容，它真的美得要命。
+🖤 我喜欢你的眼睛，不管是在哪一张照片里。
+🖤 我喜欢你靠在我身上睡着的样子。
+🖤 我喜欢你戴帽子的样子。
+🖤 我喜欢你的睡衣，还有你画的眼线和好看的唇色。
+🖤 我喜欢你发给我的每一条消息，
+    尤其是你快要睡着时，轻轻软软的那几条。
+🖤 我喜欢你那么爱你的小猫。
+🖤 我喜欢你对画画的热爱。
+🖤 我喜欢你和我一起做的每一件傻事。
+🖤 我喜欢你，就是你，不用变成别的任何样子。
+
+我想对你说一些我也许说得不够多的话：
+你真的很美，由内而外都很美。
+你不比任何人差，从来都不是。
+当你不相信自己的时候，请你想一想，
+有一个人，每天都因为你而微笑，
+而且他会一直相信你。
+你的才华，你的善良，你的笑容，
+全部都是我觉得这个世界上最珍贵的东西。
+
+我也想对你许下一些承诺：
+🖤 我会继续努力，成为更好的人。
+🖤 我会在你难过的时候陪在你身边，
+    就算只是静静地陪着你。
+🖤 我会相信你，也会一直提醒你要相信自己。
+🖤 我会记得我们每一个重要的日子。
+🖤 我会继续给你惊喜，
+    不只是在这个小网站里，也在现实生活里。
+🖤 我会认真听你说话，认真对待你的每一种心情。
+🖤 不管发生什么，我都会爱你。
+
+关于未来，我不知道会发生什么。
+我不知道我的家人、我的朋友、我的学业会怎样，
+我也不知道你以后会去哪里，会遇到什么样的人。
+可是有一件事，我非常非常确定：
+无论发生什么，你永远都在我心里的第一位。
+我想和你一起过两百天、三百天、一年、两年，
+我想和你一起过很多很多个纪念日，
+我想有一天，我们能一起回头看这一百天，笑着说：
+“你看，那个时候，我们才刚刚开始呢。”
+
+这个小网站，是我为你做的。
+里面有我们的照片、我们的日记、我们的音乐、
+我们一起玩的小游戏，
+还有很多我偷偷藏起来的小惊喜。
+而这，还不是全部——
+以后不管是在现实生活里，还是在这个网站里，
+还会有更多、更多的惊喜在等着你。🎁
+
+最后，我想说一句话，
+一句我说一百遍都不嫌多的话：
+我爱你，诗雨。
+我爱你，我的小猫咪。🐈‍⬛
+你永远是我的小猫咪，我也永远是你的小猫咪。
+谢谢你陪我走过这一百天，
+也谢谢你，让我期待接下来的每一天。
+
+一百天快乐，我最爱的人。💯🖤
+
+永远爱你的，
+你的小猫咪 🐈‍⬛💋</p>
   </div>
 </section>
 
@@ -2160,7 +2422,8 @@
 
   function updateCountdown(){
     var now = new Date();
-    var diffMs = now - startDate;
+    // si conta con l'orologio "da muro", cosi' il cambio dell'ora legale non sposta i giorni di un'ora
+    var diffMs = wallClockMs(now) - wallClockMs(startDate);
     if(diffMs < 0){ diffMs = 0; }
 
     var totalSeconds = Math.floor(diffMs / 1000);
@@ -2170,6 +2433,8 @@
     var seconds = totalSeconds % 60;
 
     var grid = document.getElementById('countdown-grid');
+    // nel giorno 100 il contatore cambia colore; il giorno dopo torna normale
+    grid.classList.toggle('countdown-100', days === 100);
     grid.innerHTML =
       cell(days, '天') +
       cell(hours, '小時') +
@@ -2493,6 +2758,54 @@
 
   checkFourMonthAnniversary();
   setInterval(checkFourMonthAnniversary, 30000);
+
+  // =========================================================
+  // 100 GIORNI INSIEME
+  // Scatta quando il contatore dei giorni arriva a 100 (9 novembre)
+  // e dura tutto quel giorno. Il giorno dopo torna tutto normale.
+  // =========================================================
+  var hundredRainLaunched = false;
+
+  // millisecondi "da muro": ignora i cambi di ora legale
+  function wallClockMs(d){
+    return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds());
+  }
+
+  function daysTogetherNow(){
+    var diff = wallClockMs(new Date()) - wallClockMs(startDate);
+    return diff < 0 ? 0 : Math.floor(diff / 86400000);
+  }
+
+  function checkHundredDays(){
+    var isDay100 = (daysTogetherNow() === 100);
+    document.getElementById('hundred-days').classList.toggle('show', isDay100);
+
+    if(isDay100 && !hundredRainLaunched){
+      hundredRainLaunched = true;
+      launchHundredRain();
+    } else if(!isDay100 && hundredRainLaunched){
+      hundredRainLaunched = false;
+      document.querySelectorAll('.hundred-piece').forEach(function(el){ el.remove(); });
+    }
+  }
+
+  // Pioggia di emoji per tutto il giorno
+  function launchHundredRain(){
+    var container = document.getElementById('site-confetti-container');
+    var pieces = ['💯','🎉','🥳','💗','🖤','🎂','✨','🐈\u200d⬛','💋','🎊','🥂','❤️'];
+    for(var i = 0; i < 70; i++){
+      var span = document.createElement('span');
+      span.className = 'site-confetti-piece hundred-piece';
+      span.textContent = pieces[Math.floor(Math.random() * pieces.length)];
+      span.style.left = (Math.random() * 100) + '%';
+      span.style.animationDuration = (4 + Math.random() * 4) + 's';
+      span.style.animationDelay = (Math.random() * 7) + 's';
+      container.appendChild(span);
+    }
+  }
+
+  checkHundredDays();
+  setInterval(checkHundredDays, 30000);
 
   // =========================================================
   // OROLOGIO: Italia e Cina in tempo reale
